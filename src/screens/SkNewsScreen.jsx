@@ -3,10 +3,10 @@ import { Text } from 'react-native-paper'
 import styles from '../config/styles'
 
 
-export default function HomeScreen() {
+export default function SkNewsScreen() {
     return (
         <View>
-            <Text style={styles.title}>Seek<Text style={styles.purple}> Tube</Text></Text> 
+            <Text style={styles.title}>Seek News<Text style={styles.purple}> Tube</Text></Text> 
         </View>
     )
 }
