@@ -19,69 +19,77 @@ import SkStudyScreen from '../screens/SkStudyScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
-
-export default function AppNavigator() {
-    return (
+ 
+    export default function AppNavigator() {
+        const { isDarkTheme } = useTheme();
+    
+        const theme = isDarkTheme ? ThemeDark : ThemeLight;
+        const themeNavigation = isDarkTheme
+          ? ThemeDarkNavigation
+          : ThemeLightNavigation;
+    
+      return (
         <Provider theme={theme}>
         <NavigationContainer theme={themeNavigation}>
-            <Stack.Navigator>
-                <Stack.Screen
-                    name="TabNavigator"
-                    component={TabNavigator}
-                    options={{ headerShown: false }}
-                />
-            </Stack.Navigator>
+          <Stack.Navigator>
+            <Stack.Screen
+             name="Home"
+             component={TabsNavigation} 
+             options={{
+                 title: 'home',
+                 tabBarIcon: 'home' }}/>
+            <Stack.Screen
+             name="News"
+             component={SkNewsScreen}
+             options={{
+                 title: 'news',
+                 tabBarIcon: 'newspaper',
+             }}
+              />
+            <Stack.Screen
+             name="Sobre"
+             component={SobreScreen}
+             options={{
+                 title: 'sobre',
+                 tabBarIcon: 'information',
+             }}
+            />
+            <Stack.Screen 
+            name="SignIn"
+            component={SignInScreen}
+            options={{
+                title: 'contato',
+                tabBarIcon: 'mail',
+            }}
+             />
+             <Stack.Screen 
+            name="SignUp"
+            component={SignUpScreen} 
+            options={{
+             title: 'study',
+             tabBarIcon: 'book',   
+            }}
+             />
+             <Stack.Screen 
+            name="Perfil"
+            component={SkStudyScreen}
+            options={{
+                title: 'perfil',
+                tabBarIcon: 'account',
+            }}/>
+          </Stack.Navigator>
         </NavigationContainer>
         </Provider>
-    );
-}
+      );
+    }
+    
+    const Tabs = createMaterialBottomTabNavigator();
 
-function TabNavigator() {
+
+export function TabsNavigation() {
     return (
-        <Tab.Navigator>
-            <Tab.Screen
-                name="Home"
-                component={HomeScreen} 
-                options={{
-                    title: 'home',
-                    tabBarIcon: 'home',
-                }}
-                />
-                <Tab.Screen
-                name="News"
-                component={SkNewsScreen}
-                options={{
-                    title: 'news',
-                    tabBarIcon: 'newspaper',
-                }} /> 
-                <Tab.Screen 
-                name="Sobre"
-                component={SobreScreen}
-                options={{
-                    title: 'sobre',
-                    tabBarIcon: 'information',
-                }}/>
-                <Tab.Screen
-                name=""
-                component={SignInScreen}
-                options={{
-                    title: 'contato',
-                    tabBarIcon: 'mail',
-                }} />
-                <Tab.Screen
-                name=""
-                component={SignUpScreen} 
-                options={{
-                 title: 'study',
-                 tabBarIcon: 'book',   
-                }} />
-                <Tab.Screen
-                name="Perfil"
-                component={SkStudyScreen}
-                options={{
-                    title: 'perfil',
-                    tabBarIcon: 'account',
-                }} />
-        </Tab.Navigator>
+      <Tabs.Navigator>
+        <Tabs.Screen name="Home" component={TabsNavigation} />
+      </Tabs.Navigator>
     );
-}
+  }
