@@ -6,7 +6,8 @@ import styles from '../config/styles'
 export default function HomeScreen() {
     return (
         <View>
-            <Text style={styles.title}>Seek<Text style={styles.purple}> Tube</Text></Text> 
+            <Text style={styles.title}>Seek<Text style={styles.purple}> Tube</Text></Text>
+            {/* libera  */}
         </View>
     )
 }
