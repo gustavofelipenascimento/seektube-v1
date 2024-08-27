@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View,  ScrollView } from "react-native";
 import { auth } from "../config/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { styles } from "../config/style";
+import  styles  from "../config/styles";
 import { Surface, TextInput, Button, Text} from "react-native-paper";
 import { Image } from "expo-image";
 

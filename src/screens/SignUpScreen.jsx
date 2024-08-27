@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ScrollView, View } from "react-native";
 import { Button, Surface, Text, TextInput } from "react-native-paper";
-import { styles } from "../config/style";
+import  styles  from "../config/styles";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../config/firebase";
 import { collection, doc, setDoc } from "firebase/firestore";
@@ -186,7 +186,7 @@ export default function RegisterScreen({ navigation }) {
             Registrar
           </Button>
           <Text style={styles.error}>{err}</Text>
-          <Button onPress={() => navigation.navigate("Login")}>
+          <Button onPress={() => navigation.navigate("SignIn")}>
             Voltar ao Login
           </Button>
         </View>
