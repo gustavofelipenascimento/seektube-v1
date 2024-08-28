@@ -40,6 +40,7 @@ export default function LoginScreen({ navigation }) {
             secureTextEntry
             style={styles.input}
           />
+    
 
           <Button style={styles.button} onPress={handleLogin} mode="contained-tonal">Logar</Button>
           <Button style={styles.button} onPress={() => navigation.navigate("SignIn")} mode="contained-tonal">Login</Button>
