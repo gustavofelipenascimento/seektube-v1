@@ -23,10 +23,12 @@ const styles = StyleSheet.create({
       },
       input: {
         height: 40,
-        borderColor: "gray",
-        borderWidth: 1,
+        borderColor: '#757aff',
+        borderWidth: 2,
         marginBottom: 12,
         paddingHorizontal: 8,
+        borderRadius: 20,
+      
       },
       button: {
         marginTop: 12,
@@ -45,6 +47,7 @@ const styles = StyleSheet.create({
       innerContainer: {
         paddingHorizontal: 20,
         alignSelf: "stretch",
+        borderRadius: 50,
       },
       title: {
         fontSize: 24,
@@ -72,7 +75,8 @@ const styles = StyleSheet.create({
       },
       image: {
         height: 259,
-        width: 259,
+        width: 200,
+        marginLeft: '25%',
       },
       paragraph: {
         fontSize: 18,

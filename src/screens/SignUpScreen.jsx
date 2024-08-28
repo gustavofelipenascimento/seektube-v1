@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ScrollView, View } from "react-native";
+import { ScrollView, View, Image } from "react-native";
 import { Button, Surface, Text, TextInput } from "react-native-paper";
 import  styles  from "../config/styles";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -69,8 +69,14 @@ export default function RegisterScreen({ navigation }) {
   return (
     <ScrollView>
       <Surface style={styles.container}>
-        <Text style={styles.title}>Sign Up</Text>
+
         <View style={styles.innerContainer}>
+        <Image
+        style={styles.image}
+        source={require('../img/seektube.png')}
+      />
+
+<Text style={styles.title}>Cadastre-se</Text>
           <TextInput
             placeholder="Coloque seu E-mail"
             onChangeText={setEmail}
