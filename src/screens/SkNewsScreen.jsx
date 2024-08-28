@@ -3,7 +3,8 @@ import { Text } from 'react-native-paper'
 import styles from '../config/styles'
 
 
-export default function SkNewsScreen() {
+
+export default function SkNewsScreen({navigation}) {
     return (
         <View>
             <Text style={styles.title}>Seek News<Text style={styles.purple}> Tube</Text></Text> 
