@@ -42,7 +42,6 @@ export default function LoginScreen({ navigation }) {
           />
 
           <Button style={styles.button} onPress={handleLogin} mode="contained-tonal">Logar</Button>
-          <Button style={styles.button} onPress={() => navigation.navigate("SignIn")} mode="contained-tonal">Login</Button>
           <Button style={styles.button} onPress={() => navigation.navigate("SignUp")} mode="contained-tonal">Registrar</Button>
           <Button style={styles.button} onPress={() => navigation.navigate("News")} mode="contained-tonal">SeekNews</Button>
           <Button style={styles.button} onPress={() => navigation.navigate("Home")} mode="contained-tonal">SeekTube</Button>

@@ -12,11 +12,6 @@ export default function RegisterScreen({ navigation }) {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [cep, setCEP] = useState("");
-  const [publicspace, setPublicSpace] = useState("");
-  const [neighborhood, setNeighborhood] = useState("");
   const [err, setError] = useState("");
 
   function mkRegister() {
@@ -30,11 +25,7 @@ export default function RegisterScreen({ navigation }) {
       password === "" ||
       confirmPassword === "" ||
       firstName === "" ||
-      lastName === "" ||
-      city === "" ||
-      state === "" ||
-      cep === "" ||
-      publicspace === ""
+      lastName === ""
     ) {
       setError("Preencha todos os campos");
     } else if (password.length < 7) {
@@ -66,11 +57,7 @@ export default function RegisterScreen({ navigation }) {
       firstName: firstName,
       lastName: lastName,
       email: email,
-      cep: cep,
-      publicSpace: publicspace,
-      neighborhood: neighborhood,
-      city: city,
-      state: state,
+
     }
   );
     } catch (err) {
@@ -78,24 +65,6 @@ export default function RegisterScreen({ navigation }) {
     }
   }
 
-  function searchCEP() {
-    console.log("SearchCEP");
-    let cleancep = cep.replace("-", "").trim();
-    fetch(`https://viacep.com.br/ws/${cleancep}/json/`)
-      .then((res) => res.json())
-      .then((dados) => {
-        setCEP(dados.cep);
-        setPublicSpace(dados.logradouro);
-        setNeighborhood(dados.bairro);
-        setCity(dados.localidade);
-        setState(dados.uf);
-        console.log(dados);
-      })
-      .catch((err) => {
-        console.log(err);
-        StorageError("CEP não encontrado");
-      });
-  }
 
   return (
     <ScrollView>
@@ -134,54 +103,7 @@ export default function RegisterScreen({ navigation }) {
             value={lastName}
             style={styles.input}
           />
-          <Text variant="headlineSmall">Personal data</Text>
-          <TextInput
-            placeholder="Coloque seu CEP"
-            onChangeText={setCEP}
-            value={cep}
-            keyboardType="numeric"
-            onBlur={searchCEP}
-            style={styles.input}
-            maxLength={8}
-          />
-          <TextInput
-            placeholder="Coloque seu bairro"
-            onChangeText={setNeighborhood}
-            value={neighborhood}
-            style={styles.input}
-          />
-          <TextInput
-            placeholder="Coloque seu logradouro"
-            onChangeText={setPublicSpace}
-            value={publicspace}
-            style={styles.input}
-          />
 
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <TextInput
-              placeholder="Coloque sua cidade"
-              onChangeText={setCity}
-              value={city}
-              style={{
-                ...styles.input,
-                width: "69%",
-              }}
-            />
-            <TextInput
-              placeholder="Estado"
-              onChangeText={setState}
-              value={state}
-              style={{
-                ...styles.input,
-                width: "30%",
-              }}
-            />
-          </View>
           <Button onPress={mkRegister} mode="outlined">
             Registrar
           </Button>
