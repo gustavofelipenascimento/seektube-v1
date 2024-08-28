@@ -71,7 +71,7 @@ export default function AppNavigator() {
             }}
           />
           <Stack.Screen
-            name="Perfil"
+            name="Study"
             component={SkStudyScreen}
             options={{
               title: "perfil",

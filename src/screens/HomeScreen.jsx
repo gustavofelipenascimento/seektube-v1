@@ -7,7 +7,7 @@ export default function HomeScreen({navigation}) {
     <Surface style={styles.container}>
       <View style={styles.innerContainer}>
         <Text style={styles.title}>You're Welcome to the our app</Text>
-        <Button onPress={() => navigation.navigate("SignUp")} mode="contained">
+        <Button onPress={() => navigation.navigate("SignIn")} mode="contained">
           Login
         </Button>
       </View>
