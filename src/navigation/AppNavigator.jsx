@@ -29,53 +29,50 @@ export default function AppNavigator() {
   return (
     <Provider theme={theme}>
       <NavigationContainer theme={themeNavigation}>
-        <Stack.Navigator>
+        <Stack.Navigator
+           screenOptions={{
+              headerShown: false,
+          }}
+        >
           <Stack.Screen
             name="Home"
             component={HomeScreen}
             options={{
-              title: "Home",
-              tabBarIcon: "home",
             }}
           />
           <Stack.Screen
             name="News"
             component={SkNewsScreen}
             options={{
-              title: "news",
-              tabBarIcon: "newspaper",
+              headerShown: false, // Oculta o cabeçalho superior
             }}
           />
           <Stack.Screen
             name="Sobre"
             component={SobreScreen}
             options={{
-              title: "sobre",
-              tabBarIcon: "information",
+              headerShown: false, // Oculta o cabeçalho superior
             }}
           />
           <Stack.Screen
             name="SignIn"
             component={SignInScreen}
             options={{
-              title: "contato",
-              tabBarIcon: "mail",
+             
             }}
           />
           <Stack.Screen
             name="SignUp"
             component={SignUpScreen}
             options={{
-              title: "study",
-              tabBarIcon: "book",
+              headerShown: false, // Oculta o cabeçalho superior
             }}
           />
           <Stack.Screen
             name="Study"
             component={SkStudyScreen}
             options={{
-              title: "perfil",
-              tabBarIcon: "account",
+              headerShown: false, // Oculta o cabeçalho superior
             }}
           />
         </Stack.Navigator>
