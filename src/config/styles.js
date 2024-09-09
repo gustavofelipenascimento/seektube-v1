@@ -33,14 +33,143 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: "white",
   },
+  inputNews: {
+    height: 25,
+    borderColor: "#d5466d",
+    borderWidth: 1,
+    marginBottom: 15,
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+    borderRadius: 50,
+    padding: 10,
+    backgroundColor: "white",
+  },
+  inputStudy: {
+    height: 25,
+    borderColor: "#fae06f",
+    borderWidth: 1,
+    marginBottom: 15,
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+    borderRadius: 50,
+    padding: 10,
+    backgroundColor: "white",
+  },
   button: {
     marginTop: 12,
     backgroundColor: "#7979FC",
     color: "white",
     fontSize: 24,
     alignSelf: "center",
-    width: "60%",
+    width: "75%",
   },
+
+
+  button2: {
+    marginTop: 12,
+    backgroundColor: "white",
+    fontSize: 24,
+    alignSelf: "center",
+    width: "auto",
+    borderWidth: 1,
+    borderColor: "#7979FC",
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+    borderRadius: 50,
+  },
+
+  
+  button3: {
+    marginTop: 12,
+    backgroundColor: "white",
+    fontSize: 24,
+    alignSelf: "center",
+    width: "27.5%",
+    borderWidth: 1,
+    borderColor: "#7979FC",
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+    borderRadius: 50,
+    justifyContent: "space-between",
+    fontWeight: "bold",
+  },
+
+  buttonN: {
+    marginTop: 12,
+    backgroundColor: "white",
+    fontSize: 24,
+    alignSelf: "center",
+    width: "27.5%",
+    borderWidth: 1,
+    borderColor: "#d5466d",
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+    borderRadius: 50,
+    justifyContent: "space-between",
+    fontWeight: "bold",
+  },
+
+
+  buttonS: {
+    marginTop: 12,
+    backgroundColor: "white",
+    fontSize: 24,
+    alignSelf: "center",
+    width: "27.5%",
+    borderWidth: 1,
+    borderColor: "#fae06f",
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+    borderRadius: 50,
+    justifyContent: "space-between",
+    fontWeight: "bold",
+  },
+
+  seek: {
+    marginTop: 12,
+    backgroundColor: "#7979FC",
+    alignSelf: "center",
+    width: "27.5%",
+    borderWidth: 1,
+    borderColor: "#7979FC",
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+    borderRadius: 50,
+    justifyContent: "space-between",
+    fontSize: 50,
+  },
+
+  news: {
+    marginTop: 12,
+    backgroundColor: "#d5466d",
+    alignSelf: "center",
+    width: "27.5%",
+    borderWidth: 1,
+    borderColor: "#d5466d",
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+    borderRadius: 50,
+    justifyContent: "space-between",
+    fontSize: 50,
+  },
+
+
+  study: {
+    marginTop: 12,
+    backgroundColor: "#fae06f",
+    alignSelf: "center",
+    width: "27.5%",
+    borderWidth: 1,
+    borderColor: "#fae06f",
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+    borderRadius: 50,
+    justifyContent: "space-between",
+    fontSize: 50,
+  },
+
+  
+  
   error: {
     color: "red",
   },
@@ -63,6 +192,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: "center",
     bottom: 20,
+    
   },
   modal: {
     backgroundColor: "white",
@@ -97,8 +227,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 18,
   },
-  label: {
-   
+  conjunto: {
+    flexDirection: "row",
+    justifyContent: "space-around",
   },
 });
 

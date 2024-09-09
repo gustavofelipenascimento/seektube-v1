@@ -6,13 +6,13 @@ import { Image } from "expo-image";
 
 
 
-export default function SkNewsScreen({navigation}) {
+export default function SeekScreen({navigation}) {
   return (
     <Surface style={styles.container}>
       <View style={styles.innerContainer}>
       <Image
               style={styles.image}
-              source={require("../img/seeknews.png")}
+              source={require("../img/seektube.png")}
             />
 
 
@@ -20,7 +20,7 @@ export default function SkNewsScreen({navigation}) {
               placeholder="Insira um link..."
             //   onChangeText={setEmail}
             //   value={email}
-              style={styles.inputNews}
+              style={styles.input}
               underlineColor="transparent"
               activeUnderlineColor="transparent"
             />
@@ -28,15 +28,15 @@ export default function SkNewsScreen({navigation}) {
 
 
     <View style={styles.conjunto}>
-    <Button onPress={() => navigation.navigate("SignIn")} mode="contained-tonal" style={styles.buttonN}>
+    <Button onPress={() => navigation.navigate("SignIn")} mode="contained-tonal" style={styles.button3}>
             Cortar       
         </Button>
 
-        <Button onPress={() => navigation.navigate("SignIn")} mode="contained-tonal" style={styles.buttonN}>
+        <Button onPress={() => navigation.navigate("SignIn")} mode="contained-tonal" style={styles.button3}>
           Limpar
         </Button>
 
-        <Button onPress={() => navigation.navigate("SignIn")} mode="contained" style={styles.news}>
+        <Button onPress={() => navigation.navigate("SignIn")} mode="contained" style={styles.seek}>
           Seek!
         </Button>
     </View>
