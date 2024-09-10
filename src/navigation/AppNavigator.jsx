@@ -15,6 +15,10 @@ import SobreScreen from "../screens/SobreScreen";
 import SignInScreen from "../screens/SignInScreen";
 import SignUpScreen from "../screens/SignUpScreen";
 import SkStudyScreen from "../screens/SkStudyScreen";
+import SeekScreen from "../screens/SeekScreen";
+import FeedbackScreen from "../screens/FeedbackScreen";
+import ConfirmaSenSeek from "../screens/ConfirmaSenSeek";
+import SenhaSeek from "../screens/SenhaSeek";
 
 const Stack = createNativeStackNavigator();
 
@@ -29,53 +33,74 @@ export default function AppNavigator() {
   return (
     <Provider theme={theme}>
       <NavigationContainer theme={themeNavigation}>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Home"
-            component={HomeScreen}
-            options={{
-              title: "Home",
-              tabBarIcon: "home",
-            }}
-          />
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
+          <Stack.Screen name="Home" component={HomeScreen} options={{}} />
           <Stack.Screen
             name="News"
             component={SkNewsScreen}
             options={{
-              title: "news",
-              tabBarIcon: "newspaper",
+              headerShown: false, // Oculta o cabeçalho superior
             }}
           />
           <Stack.Screen
             name="Sobre"
             component={SobreScreen}
             options={{
-              title: "sobre",
-              tabBarIcon: "information",
+              headerShown: false, // Oculta o cabeçalho superior
             }}
           />
-          <Stack.Screen
-            name="SignIn"
-            component={SignInScreen}
-            options={{
-              title: "contato",
-              tabBarIcon: "mail",
-            }}
-          />
+          <Stack.Screen name="SignIn" component={SignInScreen} options={{}} />
           <Stack.Screen
             name="SignUp"
             component={SignUpScreen}
             options={{
-              title: "study",
-              tabBarIcon: "book",
+              headerShown: false, // Oculta o cabeçalho superior
             }}
           />
           <Stack.Screen
             name="Study"
             component={SkStudyScreen}
             options={{
-              title: "perfil",
-              tabBarIcon: "account",
+              headerShown: false, // Oculta o cabeçalho superior
+            }}
+          />
+          <Stack.Screen
+            name="Seek"
+            component={SeekScreen}
+            options={{
+              headerShown: false, // Oculta o cabeçalho superior
+            }}
+          />
+            <Stack.Screen
+            name="Feedback"
+            component={FeedbackScreen}
+            options={{
+              headerShown: false, // Oculta o cabeçalho superior
+            }}
+          />
+            <Stack.Screen
+            name="PerfilScreen"
+            component={SeekScreen}
+            options={{
+              headerShown: false, // Oculta o cabeçalho superior
+            }}
+          />
+          <Stack.Screen
+            name="SenhaSeek"
+            component={SenhaSeek}
+            options={{
+              headerShown: false, // Oculta o cabeçalho superior
+            }}
+          />
+          <Stack.Screen
+            name="ConfirmaSenSeek"
+            component={ConfirmaSenSeek}
+            options={{
+              headerShown: false, // Oculta o cabeçalho superior
             }}
           />
         </Stack.Navigator>

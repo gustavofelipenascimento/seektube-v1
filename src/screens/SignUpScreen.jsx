@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { ScrollView, View } from "react-native";
+import { ScrollView, View, Image } from "react-native";
 import { Button, Surface, Text, TextInput } from "react-native-paper";
-import  styles  from "../config/styles";
+import styles from "../config/styles";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../config/firebase";
 import { collection, doc, setDoc } from "firebase/firestore";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function RegisterScreen({ navigation }) {
   const [email, setEmail] = useState("");
@@ -52,67 +53,94 @@ export default function RegisterScreen({ navigation }) {
       console.log("Usuario Registrado", user);
 
       const collectionRef = collection(db, "usuarios");
-      const docRef = await setDoc(doc(collectionRef, user.uid),
-    {
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-
-    }
-  );
+      const docRef = await setDoc(doc(collectionRef, user.uid), {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+      });
     } catch (err) {
       setError("Erro no registro");
     }
   }
 
-
   return (
     <ScrollView>
-      <Surface style={styles.container}>
-        <Text style={styles.title}>Sign Up</Text>
-        <View style={styles.innerContainer}>
-          <TextInput
-            placeholder="Coloque seu E-mail"
-            onChangeText={setEmail}
-            value={email}
-            style={styles.input}
-          />
-          <TextInput
-            placeholder="Coloque sua senha"
-            onChangeText={setPassword}
-            value={password}
-            secureTextEntry
-            style={styles.input}
-          />
-          <TextInput
-            placeholder="Confirme sua senha"
-            onChangeText={setConfirmPassword}
-            value={confirmPassword}
-            secureTextEntry
-            style={styles.input}
-          />
-          <TextInput
-            placeholder="Coloque seu nome"
-            onChangeText={setFirstName}
-            value={firstName}
-            style={styles.input}
-          />
-          <TextInput
-            placeholder="Coloque seu ultimo nome"
-            onChangeText={setLastName}
-            value={lastName}
-            style={styles.input}
-          />
+        <Surface style={styles.container}>
+          <View style={styles.innerContainer}>
+            <Image
+              style={styles.image}
+              source={require("../img/seektube.png")}
+            />
 
-          <Button onPress={mkRegister} mode="outlined">
-            Registrar
-          </Button>
-          <Text style={styles.error}>{err}</Text>
-          <Button onPress={() => navigation.navigate("SignIn")}>
-            Voltar ao Login
-          </Button>
-        </View>
-      </Surface>
+            <Text style={styles.title}>Cadastre-se!</Text>
+            
+
+            <Text style={styles.inputxt}>Email:</Text>
+            <TextInput
+              placeholder="Coloque seu E-mail"
+              onChangeText={setEmail}
+              value={email}
+              style={styles.input}
+              underlineColor="transparent"
+              activeUnderlineColor="transparent"
+            />
+
+            <Text style={styles.inputxt}>Senha:</Text>
+            <TextInput
+              placeholder="Coloque sua senha"
+              onChangeText={setPassword}
+              value={password}
+              secureTextEntry
+              style={styles.input}
+               underlineColor="transparent"
+              activeUnderlineColor="transparent"
+            />
+
+            <Text style={styles.inputxt}>Confirmar Senha:</Text>
+            <TextInput
+              placeholder="Confirme sua senha"
+              onChangeText={setConfirmPassword}
+              value={confirmPassword}
+              secureTextEntry
+              style={styles.input}
+               underlineColor="transparent"
+              activeUnderlineColor="transparent"
+            />
+
+
+            <Text style={styles.inputxt}>Nome:</Text>
+            <TextInput
+              placeholder="Coloque seu nome"
+              onChangeText={setFirstName}
+              value={firstName}
+              style={styles.input}
+               underlineColor="transparent"
+              activeUnderlineColor="transparent"
+            />
+
+            <Text style={styles.inputxt}>Último Nome:</Text>
+            <TextInput
+              placeholder="Coloque seu último nome"
+              onChangeText={setLastName}
+              value={lastName}
+              style={styles.input}
+               underlineColor="transparent"
+              activeUnderlineColor="transparent"
+            />
+
+            <Button onPress={mkRegister} mode="contained" style={styles.button}>
+              Enviar
+            </Button>
+            <Text style={styles.error}>{err}</Text>
+            <Button onPress={() => navigation.navigate("SignIn")}>
+              Voltar ao Login
+            </Button>
+
+            <Button onPress={() => navigation.navigate("SignIn")}>
+              Problemas no Cadastro? Clique aqui!
+            </Button>
+          </View>
+        </Surface>
     </ScrollView>
   );
 }
