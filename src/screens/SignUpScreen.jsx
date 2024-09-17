@@ -5,41 +5,43 @@ import styles from "../config/styles";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../config/firebase";
 import { collection, doc, setDoc } from "firebase/firestore";
-import { SafeAreaView } from "react-native-safe-area-context";
+import bcrypt from "bcryptjs"; // Add this line
 
 export default function RegisterScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [dtnasc, setDtNasc] = useState("");
+  const [nome, setNome] = useState("");
+  const [estado, setEstado] = useState("");
   const [err, setError] = useState("");
 
-  function mkRegister() {
-    console.log("Register");
-    firebaseRegister();
-
+  async function validateForm() {
     if (password !== confirmPassword) {
-      setError("Passwords do not match");
-    } else if (
-      email === "" ||
-      password === "" ||
-      confirmPassword === "" ||
-      firstName === "" ||
-      lastName === ""
-    ) {
-      setError("Preencha todos os campos");
-    } else if (password.length < 7) {
-      setError("A senha tem que ter no mínimo 8 digitos");
-    } else if (password.indexOf(" ") >= 0) {
-      setError("A senha não pode conter espaços");
-    } else if (email.indexOf("@") < 0 || email.indexOf(".") < 0) {
-      setError("E-mail Invalido");
-    } else if (email.indexOf(" ") >= 0) {
-      setError("E-mail não pode conter espaços");
-    } else {
-      navigation.navigate("Login");
+      setError("As senhas não conferem");
+      return false;
     }
+    if (password.length < 8) {
+      setError("A senha deve ter no mínimo 8 caracteres");
+      return false;
+    }
+    if (nome.length < 3) {
+      setError("O nome deve ter no mínimo 3 caracteres");
+      return false;
+    }
+    if (dtnasc.length < 10) {
+      setError("A data de nascimento deve ter no mínimo 10 caracteres");
+      return false;
+    }
+    if (estado.length < 2) {
+      setError("O estado deve ter no mínimo 2 caracteres");
+      return false;
+    }
+    if (!validateEmail(email)) {
+      setError("E-mail inválido");
+      return false;
+    }
+    return true;
   }
 
   async function firebaseRegister() {
@@ -52,19 +54,38 @@ export default function RegisterScreen({ navigation }) {
       const user = userCredential.user;
       console.log("Usuario Registrado", user);
 
+      const hashedPassword = await bcrypt.hash(password, 10);
       const collectionRef = collection(db, "usuarios");
-      const docRef = await setDoc(doc(collectionRef, user.uid), {
-        firstName: firstName,
-        lastName: lastName,
+      await setDoc(
+        doc(
+          collectionRef, 
+          user.uid),
+           {
         email: email,
+        estado: estado,
+        dtnasc: dtnasc,
+        nome: nome,
+        password: hashedPassword, // Store hashed password
       });
     } catch (err) {
       setError("Erro no registro");
     }
   }
 
-  return (
-    <ScrollView>
+  function mkRegister() {
+    if (validateForm()) {
+      firebaseRegister();
+      navigation.navigate("Login");
+    }
+  }
+
+  function validateEmail(email) {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(email);
+  }
+
+    return (
+      <ScrollView>
         <Surface style={styles.container}>
           <View style={styles.innerContainer}>
             <Image
@@ -73,7 +94,16 @@ export default function RegisterScreen({ navigation }) {
             />
 
             <Text style={styles.title}>Cadastre-se!</Text>
-            
+
+            <Text style={styles.inputxt}>Nome:</Text>
+            <TextInput
+              placeholder="Coloque seu Nome"
+              onChangeText={setNome}
+              value={nome}
+              style={styles.input}
+              underlineColor="transparent"
+              activeUnderlineColor="transparent"
+            />
 
             <Text style={styles.inputxt}>Email:</Text>
             <TextInput
@@ -92,7 +122,7 @@ export default function RegisterScreen({ navigation }) {
               value={password}
               secureTextEntry
               style={styles.input}
-               underlineColor="transparent"
+              underlineColor="transparent"
               activeUnderlineColor="transparent"
             />
 
@@ -103,32 +133,34 @@ export default function RegisterScreen({ navigation }) {
               value={confirmPassword}
               secureTextEntry
               style={styles.input}
-               underlineColor="transparent"
+              underlineColor="transparent"
               activeUnderlineColor="transparent"
             />
 
-
-            <Text style={styles.inputxt}>Nome:</Text>
+            <Text style={styles.inputxt}>Data de Nascimento:</Text>
             <TextInput
-              placeholder="Coloque seu nome"
-              onChangeText={setFirstName}
-              value={firstName}
+              placeholder="Ex: dd/mm/aaaa"
+              onChangeText={setDtNasc}
+              value={dtnasc}
               style={styles.input}
-               underlineColor="transparent"
+              underlineColor="transparent"
               activeUnderlineColor="transparent"
             />
-
-            <Text style={styles.inputxt}>Último Nome:</Text>
+            <Text style={styles.inputxt}>Estado:</Text>
             <TextInput
-              placeholder="Coloque seu último nome"
-              onChangeText={setLastName}
-              value={lastName}
+              placeholder="Coloque seu Estado"
+              onChangeText={setEstado}
+              value={estado}
               style={styles.input}
-               underlineColor="transparent"
+              underlineColor="transparent"
               activeUnderlineColor="transparent"
             />
 
-            <Button onPress={mkRegister} mode="contained" style={styles.button}>
+            <Button
+              onPress={mkRegister}
+              mode="contained-tonal"
+              style={styles.button}
+            >
               Enviar
             </Button>
             <Text style={styles.error}>{err}</Text>
@@ -141,6 +173,7 @@ export default function RegisterScreen({ navigation }) {
             </Button>
           </View>
         </Surface>
-    </ScrollView>
-  );
-}
+      </ScrollView>
+    );
+  }
+

@@ -14,7 +14,7 @@ export default function LoginScreen({ navigation }) {
   const handleLogin = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        navigation.navigate("News");
+        navigation.navigate("Seek");
       })
       .catch((error) => {
         setError(error.message);
@@ -51,48 +51,48 @@ export default function LoginScreen({ navigation }) {
           activeUnderlineColor="transparent"
         />
 
-        <Button style={styles.button} onPress={handleLogin} mode="contained">
+        <Button style={styles.button} onPress={handleLogin} mode="contained-tonal">
           Entrar
         </Button>
         <Button
           style={styles.button}
           onPress={() => navigation.navigate("SignUp")}
-          mode="contained"
+          mode="contained-tonal"
         >
           Registrar
         </Button>
         <Button
           style={styles.button}
           onPress={() => navigation.navigate("News")}
-          mode="contained"
+          mode="contained-tonal"
         >
           SeekNews
         </Button>
         <Button
           style={styles.button}
           onPress={() => navigation.navigate("Home")}
-          mode="contained"
+          mode="contained-tonal"
         >
           SeekTube
         </Button>
         <Button
           style={styles.button}
           onPress={() => navigation.navigate("Study")}
-          mode="contained"
+          mode="contained-tonal"
         >
           SeekStudy
         </Button>
         <Button
           style={styles.button}
           onPress={() => navigation.navigate("Sobre")}
-          mode="contained"
+          mode="contained-tonal"
         >
           Sobre
         </Button>
         <Button
           style={styles.button}
           onPress={() => navigation.navigate("Seek")}
-          mode="contained"
+          mode="contained-tonal"
         >
           Seek
         </Button>
@@ -100,7 +100,7 @@ export default function LoginScreen({ navigation }) {
         <Button
           style={styles.button}
           onPress={() => navigation.navigate("Feedback")}
-          mode="contained"
+          mode="contained-tonal"
         >
           Feedback
         </Button>

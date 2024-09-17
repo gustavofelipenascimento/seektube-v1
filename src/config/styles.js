@@ -31,7 +31,6 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 50,
     borderRadius: 50,
     padding: 10,
-    backgroundColor: "white",
   },
   inputNews: {
     height: 25,
@@ -42,7 +41,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 50,
     borderRadius: 50,
     padding: 10,
-    backgroundColor: "white",
+  
   },
   inputStudy: {
     height: 25,
@@ -53,7 +52,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 50,
     borderRadius: 50,
     padding: 10,
-    backgroundColor: "white",
+    
   },
   button: {
     marginTop: 12,
@@ -61,16 +60,15 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 24,
     alignSelf: "center",
-    width: "75%",
+    width: "81%"
   },
 
 
   button2: {
     marginTop: 12,
-    backgroundColor: "white",
     fontSize: 24,
     alignSelf: "center",
-    width: "auto",
+    width: "81%",
     borderWidth: 1,
     borderColor: "#7979FC",
     borderTopLeftRadius: 50,
@@ -81,7 +79,6 @@ const styles = StyleSheet.create({
   
   button3: {
     marginTop: 12,
-    backgroundColor: "white",
     fontSize: 24,
     alignSelf: "center",
     width: "27.5%",
@@ -96,10 +93,9 @@ const styles = StyleSheet.create({
 
   buttonN: {
     marginTop: 12,
-    backgroundColor: "white",
     fontSize: 24,
     alignSelf: "center",
-    width: "27.5%",
+    width: "30%",
     borderWidth: 1,
     borderColor: "#d5466d",
     borderTopLeftRadius: 50,
@@ -112,10 +108,9 @@ const styles = StyleSheet.create({
 
   buttonS: {
     marginTop: 12,
-    backgroundColor: "white",
     fontSize: 24,
     alignSelf: "center",
-    width: "27.5%",
+    width: "30%",
     borderWidth: 1,
     borderColor: "#fae06f",
     borderTopLeftRadius: 50,
@@ -129,7 +124,7 @@ const styles = StyleSheet.create({
     marginTop: 12,
     backgroundColor: "#7979FC",
     alignSelf: "center",
-    width: "27.5%",
+    width: "30%",
     borderWidth: 1,
     borderColor: "#7979FC",
     borderTopLeftRadius: 50,
@@ -143,7 +138,7 @@ const styles = StyleSheet.create({
     marginTop: 12,
     backgroundColor: "#d5466d",
     alignSelf: "center",
-    width: "27.5%",
+    width: "30%",
     borderWidth: 1,
     borderColor: "#d5466d",
     borderTopLeftRadius: 50,
@@ -158,7 +153,7 @@ const styles = StyleSheet.create({
     marginTop: 12,
     backgroundColor: "#fae06f",
     alignSelf: "center",
-    width: "27.5%",
+    width: "30%",
     borderWidth: 1,
     borderColor: "#fae06f",
     borderTopLeftRadius: 50,
@@ -216,9 +211,9 @@ const styles = StyleSheet.create({
   image: {
     height: 259,
     width: 200,
-    marginLeft: "25%",
-    marginTop: -25,
+    alignSelf: "center"
   },
+
   paragraph: {
     fontSize: 18,
     textAlign: "center",
@@ -231,6 +226,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
   },
+  littlebutton: {
+    width: 50,
+    height: 50,
+    marginTop: 50,
+    backgroundColor: "#7979FC",
+  },
+  drawerStyle: {
+    opacity: 0.8,
+  }
 });
 
 export default styles;

@@ -36,7 +36,7 @@ export default function SkNewsScreen({navigation}) {
           Limpar
         </Button>
 
-        <Button onPress={() => navigation.navigate("SignIn")} mode="contained" style={styles.news}>
+        <Button onPress={() => navigation.navigate("SignIn")} mode="contained-tonal" style={styles.news}>
           Seek!
         </Button>
     </View>

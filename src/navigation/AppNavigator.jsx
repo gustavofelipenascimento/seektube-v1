@@ -1,4 +1,3 @@
-import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import {
@@ -19,11 +18,43 @@ import SeekScreen from "../screens/SeekScreen";
 import FeedbackScreen from "../screens/FeedbackScreen";
 import ConfirmaSenSeek from "../screens/ConfirmaSenSeek";
 import SenhaSeek from "../screens/SenhaSeek";
+import ApiScreenTest from "../screens/ApiScreenTest";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { useWindowDimensions } from "react-native";
+
+
 
 const Stack = createNativeStackNavigator();
 
-export default function AppNavigator() {
+function AppNavigator() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="News" component={SkNewsScreen} />
+      <Stack.Screen name="Sobre" component={SobreScreen} />
+      <Stack.Screen name="SignIn" component={SignInScreen} />
+      <Stack.Screen name="SignUp" component={SignUpScreen} />
+      <Stack.Screen name="Study" component={SkStudyScreen} />
+      <Stack.Screen name="Seek" component={SeekScreen} />
+      <Stack.Screen name="Feedback" component={FeedbackScreen} />
+      <Stack.Screen name="SenhaSeek" component={SenhaSeek} />
+      <Stack.Screen name="ConfirmaSenSeek" component={ConfirmaSenSeek} />
+      <Stack.Screen name="ApiTest" component={ApiScreenTest} />
+    </Stack.Navigator>
+  );
+}
+
+const Drawer = createDrawerNavigator();
+
+export default function TheDrawer() {
   const { isDarkTheme } = useTheme();
+  const dimensions = useWindowDimensions();
+
+  const isLargeScreen = dimensions.width >= 768;
 
   const theme = isDarkTheme ? ThemeDark : ThemeLight;
   const themeNavigation = isDarkTheme
@@ -32,89 +63,48 @@ export default function AppNavigator() {
 
   return (
     <Provider theme={theme}>
-      <NavigationContainer theme={themeNavigation}>
-        <Stack.Navigator
+      <NavigationContainer theme={themeNavigation}
+      screenOptions={{
+
+      }}>
+        <Drawer.Navigator
+          initialRouteName="Home"
           screenOptions={{
-            headerShown: false,
+            
+            defaultStatus: "open",
+            headerTransparent: true,
+            drawerType: isLargeScreen ? "permanent" : "front",
+            drawerStyle: isLargeScreen ? null : { width: "80%" },
+            drawerContentStyle: {
+              backgroundColor: theme.colors.background,
+              paddingVertical: "50%",
+            },
+            drawerActiveTintColor: theme.colors.primary,
+            drawerInactiveTintColor: theme.colors.text,
+            drawerLabelStyle: {
+              fontSize: 16,
+              fontWeight: "bold",
+            },
           }}
         >
-          <Stack.Screen name="Home" component={HomeScreen} options={{}} />
-          <Stack.Screen
-            name="News"
-            component={SkNewsScreen}
+          <Drawer.Screen
+            name="App"
+            component={AppNavigator}
             options={{
-              headerShown: false, // Oculta o cabeçalho superior
+              drawerItemStyle: { display: "none" },
             }}
           />
-          <Stack.Screen
-            name="Sobre"
-            component={SobreScreen}
-            options={{
-              headerShown: false, // Oculta o cabeçalho superior
-            }}
-          />
-          <Stack.Screen name="SignIn" component={SignInScreen} options={{}} />
-          <Stack.Screen
-            name="SignUp"
-            component={SignUpScreen}
-            options={{
-              headerShown: false, // Oculta o cabeçalho superior
-            }}
-          />
-          <Stack.Screen
-            name="Study"
-            component={SkStudyScreen}
-            options={{
-              headerShown: false, // Oculta o cabeçalho superior
-            }}
-          />
-          <Stack.Screen
-            name="Seek"
-            component={SeekScreen}
-            options={{
-              headerShown: false, // Oculta o cabeçalho superior
-            }}
-          />
-            <Stack.Screen
-            name="Feedback"
-            component={FeedbackScreen}
-            options={{
-              headerShown: false, // Oculta o cabeçalho superior
-            }}
-          />
-            <Stack.Screen
-            name="PerfilScreen"
-            component={SeekScreen}
-            options={{
-              headerShown: false, // Oculta o cabeçalho superior
-            }}
-          />
-          <Stack.Screen
-            name="SenhaSeek"
-            component={SenhaSeek}
-            options={{
-              headerShown: false, // Oculta o cabeçalho superior
-            }}
-          />
-          <Stack.Screen
-            name="ConfirmaSenSeek"
-            component={ConfirmaSenSeek}
-            options={{
-              headerShown: false, // Oculta o cabeçalho superior
-            }}
-          />
-        </Stack.Navigator>
+          <Drawer.Screen name="Login" component={SignInScreen} />
+          <Drawer.Screen name="Cadastro" component={SignUpScreen} />
+          <Drawer.Screen name="Sobre" component={SobreScreen} />
+          <Drawer.Screen name="Study" component={SkStudyScreen} />
+          <Drawer.Screen name="Seek" component={SeekScreen} />
+          <Drawer.Screen name="Feedback" component={FeedbackScreen} />
+          <Drawer.Screen name="SenhaSeek" component={SenhaSeek} />
+          <Drawer.Screen name="ConfirmaSenSeek" component={ConfirmaSenSeek} />
+          <Drawer.Screen name="ApiTest" component={ApiScreenTest} />
+        </Drawer.Navigator>
       </NavigationContainer>
     </Provider>
-  );
-}
-
-const Tabs = createMaterialBottomTabNavigator();
-
-export function TabsNavigation() {
-  return (
-    <Tabs.Navigator>
-      <Tabs.Screen name="Home" component={TabsNavigation} />
-    </Tabs.Navigator>
   );
 }
