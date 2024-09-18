@@ -19,8 +19,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    padding: 23.9,
-    height: 500,
+    padding: 20,
+    height: 400,
   },
   input: {
     height: 25,
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     marginTop: 12,
     fontSize: 24,
     alignSelf: "center",
-    width: "27.5%",
+    width: "30%",
     borderWidth: 1,
     borderColor: "#7979FC",
     borderTopLeftRadius: 50,
@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
   
   },
   image: {
-    height: 259,
+    height: 250,
     width: 200,
     alignSelf: "center"
   },
