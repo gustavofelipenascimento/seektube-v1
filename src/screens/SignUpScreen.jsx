@@ -95,9 +95,43 @@ export default function RegisterScreen({ navigation }) {
         password: hashedPassword,
       });
 
-      navigation.navigate("Login");
-    } catch (err) {
-      setError("Erro no registro");
+      navigation.navigate("SignIn");
+    } catch (error) {
+      let errorMessage;
+      switch (error.code) {
+        case "auth/invalid-email":
+          errorMessage = "O e-mail fornecido é inválido.";
+          break;
+        case "auth/email-already-in-use":
+          errorMessage =
+            "Este e-mail já está em uso. Tente usar um e-mail diferente.";
+          break;
+        case "auth/weak-password":
+          errorMessage = "A senha deve ter pelo menos 6 caracteres.";
+          break;
+        case "auth/missing-password":
+          errorMessage = "A senha é obrigatória.";
+          break;
+        case "auth/operation-not-allowed":
+          errorMessage = "Não é possível realizar a operação solicitada.";
+          break;
+        case "auth/user-disabled":
+          errorMessage =
+            "A conta foi desativada. Entre em contato com o suporte.";
+          break;
+        case "auth/user-not-found":
+          errorMessage = "Nenhum usuário encontrado com esse e-mail.";
+          break;
+        case "auth/wrong-password":
+          errorMessage = "Senha incorreta.";
+          break;
+        case "auth/network-request-failed":
+          errorMessage = "Problema na conexão de rede. Tente novamente.";
+          break;
+        default:
+          errorMessage = "Ocorreu um erro desconhecido. Tente novamente.";
+      }
+      setError(errorMessage);
     }
   }
 
@@ -115,10 +149,11 @@ export default function RegisterScreen({ navigation }) {
   function handleDateChange(text) {
     let formattedText = text.replace(/\D/g, ""); // Remove tudo que não for número se tirar eu mato
     if (formattedText.length > 2) {
-      formattedText = formattedText.slice(0, 2) + '/' + formattedText.slice(2);
+      formattedText = formattedText.slice(0, 2) + "/" + formattedText.slice(2);
     }
     if (formattedText.length > 5) {
-      formattedText = formattedText.slice(0, 5) + '/' + formattedText.slice(5, 9);
+      formattedText =
+        formattedText.slice(0, 5) + "/" + formattedText.slice(5, 9);
     }
     setDtNasc(formattedText);
   }
