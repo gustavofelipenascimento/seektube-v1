@@ -234,7 +234,23 @@ const styles = StyleSheet.create({
   },
   drawerStyle: {
     opacity: 0.8,
-  }
+  },
+  titlesobre: {
+    fontSize: 30,
+    marginBottom: 20,
+    fontWeight: "bold",
+  },
+  sobre: {
+    fontSize: 18,
+    textAlign: "justify",
+    marginBottom: 20,
+  },
+  imagesobre: {
+    height: 150,
+    width: 120,
+    alignSelf: "center"
+
+  },
 });
 
 export default styles;

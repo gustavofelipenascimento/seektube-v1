@@ -55,20 +55,17 @@ function DrawerNavigator() {
           fontWeight: "bold",
         },
       }}
-      >
+    >
       <Drawer.Screen name="Seek" component={SeekScreen} />
       <Drawer.Screen name="News" component={SkNewsScreen} />
       <Drawer.Screen name="Study" component={SkStudyScreen} />
-      <Drawer.Screen name="SenhaSeek" component={SenhaSeek} />
       <Drawer.Screen name="ConfirmaSenSeek" component={ConfirmaSenSeek} />
-      <Drawer.Screen name="Feedback" component={FeedbackScreen} />
       <Drawer.Screen name="Sobre" component={SobreScreen} />
       <Drawer.Screen name="ApiTest" component={ApiScreenTest} />
     </Drawer.Navigator>
   );
 }
 //FeedBack, Sobre e API SCREEN para fazer(problema não é mais meu se fodam, a não ser que tenha erro) <3 NÃO ERREM
-
 
 // Função principal de navegação, onde o Drawer é filho do Stack
 export default function AppNavigator() {
@@ -84,6 +81,8 @@ export default function AppNavigator() {
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="SignIn" component={SignInScreen} />
           <Stack.Screen name="SignUp" component={SignUpScreen} />
+          <Stack.Screen name="Feedback" component={FeedbackScreen} />
+          <Stack.Screen name="SenhaSeek" component={SenhaSeek} />
           <Stack.Screen name="App" component={DrawerNavigator} />
         </Stack.Navigator>
       </NavigationContainer>
