@@ -221,6 +221,7 @@ export default function RegisterScreen({ navigation }) {
 
           <Text style={styles.inputxt}>Estado:</Text>
           <Picker
+            style={styles.estado}
             selectedValue={estado}
             onValueChange={(itemValue) => setEstado(itemValue)}
           >
@@ -235,7 +236,7 @@ export default function RegisterScreen({ navigation }) {
 
           <Button
             onPress={mkRegister}
-            mode="contained-tonal"
+            mode="contained"
             style={styles.button}
           >
             Enviar

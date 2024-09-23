@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 50,
     borderRadius: 50,
     padding: 10,
+    backgroundColor: "transparent",
   },
   inputNews: {
     height: 25,
@@ -249,6 +250,20 @@ const styles = StyleSheet.create({
     height: 150,
     width: 120,
     alignSelf: "center"
+
+  },
+  estado: {
+    height: 50,
+    borderColor: "#757aff",
+    borderWidth: 1,
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+    borderRadius: 50,
+    padding: 10,
+    textAlign: "center",
+    fontSize: 18,
+    backgroundColor: "transparent",
+    color: "#757aff",
 
   },
 });
