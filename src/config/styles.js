@@ -42,7 +42,6 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 50,
     borderRadius: 50,
     padding: 10,
-  
   },
   inputStudy: {
     height: 25,
@@ -53,7 +52,6 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 50,
     borderRadius: 50,
     padding: 10,
-    
   },
   button: {
     marginTop: 12,
@@ -61,9 +59,8 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 24,
     alignSelf: "center",
-    width: "81%"
+    width: "81%",
   },
-
 
   button2: {
     marginTop: 12,
@@ -77,7 +74,6 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
 
-  
   button3: {
     marginTop: 12,
     fontSize: 24,
@@ -105,7 +101,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     fontWeight: "bold",
   },
-
 
   buttonS: {
     marginTop: 12,
@@ -149,7 +144,6 @@ const styles = StyleSheet.create({
     fontSize: 50,
   },
 
-
   study: {
     marginTop: 12,
     backgroundColor: "#fae06f",
@@ -164,8 +158,6 @@ const styles = StyleSheet.create({
     fontSize: 50,
   },
 
-  
-  
   error: {
     color: "red",
   },
@@ -188,7 +180,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: "center",
     bottom: 20,
-    
   },
   modal: {
     backgroundColor: "white",
@@ -207,12 +198,11 @@ const styles = StyleSheet.create({
   errorText: {
     color: "red",
     fontSize: 16,
-  
   },
   image: {
     height: 250,
     width: 200,
-    alignSelf: "center"
+    alignSelf: "center",
   },
 
   paragraph: {
@@ -249,8 +239,7 @@ const styles = StyleSheet.create({
   imagesobre: {
     height: 150,
     width: 120,
-    alignSelf: "center"
-
+    alignSelf: "center",
   },
   estado: {
     height: 50,
@@ -264,7 +253,45 @@ const styles = StyleSheet.create({
     fontSize: 18,
     backgroundColor: "transparent",
     color: "#757aff",
-
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  btn: {
+    marginTop: 12,
+    backgroundColor: "#7979FC",
+    color: "white",
+    fontSize: 24,
+    alignSelf: "center",
+    width: "81%",
+    borderRadius: 50,
+    padding: 10,
+    elevation: 2,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
+  },
+  link: {
+    color: "#7979FC",
   },
 });
 

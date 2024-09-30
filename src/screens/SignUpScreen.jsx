@@ -1,6 +1,14 @@
 import { useState } from "react";
-import { ScrollView, View, Image } from "react-native";
-import { Button, Surface, Text, TextInput } from "react-native-paper";
+import { ScrollView, View, Image, Alert, Pressable } from "react-native";
+import {
+  Button,
+  Checkbox,
+  Modal,
+  RadioButton,
+  Surface,
+  Text,
+  TextInput,
+} from "react-native-paper";
 import { Picker } from "@react-native-picker/picker";
 import styles from "../config/styles";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -16,6 +24,7 @@ export default function RegisterScreen({ navigation }) {
   const [nome, setNome] = useState("");
   const [estado, setEstado] = useState("");
   const [err, setError] = useState("");
+  const [checked, setChecked] = useState(false);
 
   const estados = [
     { label: "Selecione seu estado", value: "" },
@@ -48,7 +57,7 @@ export default function RegisterScreen({ navigation }) {
     { label: "TO - Tocantins", value: "TO" },
   ];
 
-  async function validateForm() {
+  const validateForm = () => {
     if (password !== confirmPassword) {
       setError("As senhas não conferem");
       return false;
@@ -135,9 +144,15 @@ export default function RegisterScreen({ navigation }) {
     }
   }
 
-  function mkRegister() {
-    if (validateForm()) {
+  const mkRegister = () => {
+    const form = validateForm();
+
+    if (form) {
       firebaseRegister();
+    }
+    else if (!checked) {
+      setError("Você deve aceitar os termos e condições para continuar.");
+      return;
     }
   }
 
@@ -164,7 +179,6 @@ export default function RegisterScreen({ navigation }) {
         <View style={styles.innerContainer}>
           <Image style={styles.image} source={require("../img/seektube.png")} />
           <Text style={styles.title}>Cadastre-se!</Text>
-
           <Text style={styles.inputxt}>Nome:</Text>
           <TextInput
             placeholder="Coloque seu Nome"
@@ -174,7 +188,6 @@ export default function RegisterScreen({ navigation }) {
             underlineColor="transparent"
             activeUnderlineColor="transparent"
           />
-
           <Text style={styles.inputxt}>Email:</Text>
           <TextInput
             placeholder="Coloque seu E-mail"
@@ -184,7 +197,6 @@ export default function RegisterScreen({ navigation }) {
             underlineColor="transparent"
             activeUnderlineColor="transparent"
           />
-
           <Text style={styles.inputxt}>Senha:</Text>
           <TextInput
             placeholder="Coloque sua senha"
@@ -195,7 +207,6 @@ export default function RegisterScreen({ navigation }) {
             underlineColor="transparent"
             activeUnderlineColor="transparent"
           />
-
           <Text style={styles.inputxt}>Confirmar Senha:</Text>
           <TextInput
             placeholder="Confirme sua senha"
@@ -206,7 +217,6 @@ export default function RegisterScreen({ navigation }) {
             underlineColor="transparent"
             activeUnderlineColor="transparent"
           />
-
           <Text style={styles.inputxt}>Data de Nascimento:</Text>
           <TextInput
             placeholder="dd/mm/yyyy"
@@ -218,7 +228,6 @@ export default function RegisterScreen({ navigation }) {
             activeUnderlineColor="transparent"
             maxLength={10}
           />
-
           <Text style={styles.inputxt}>Estado:</Text>
           <Picker
             style={styles.estado}
@@ -234,18 +243,41 @@ export default function RegisterScreen({ navigation }) {
             ))}
           </Picker>
 
-          <Button
-            onPress={mkRegister}
-            mode="contained"
-            style={styles.button}
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+              paddingTop: 15,
+            }}
           >
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Checkbox
+                style={styles.checkboxsize}
+                value="CheckTerms"
+                color="#757aff"
+                status={checked === true ? "checked" : "unchecked"}
+                onPress={() => setChecked(!checked)}
+              />
+              <Text style={{ fontSize: 14 }}>
+                Aceito os termos.{" "}
+                <Text
+                  style={styles.link}
+                  onPress={() => navigation.navigate("Terms")}
+                >
+                  Ver termos e condições de uso.
+                </Text>
+              </Text>
+            </View>
+          </View>
+
+          <Button onPress={mkRegister} mode="contained" style={styles.button}>
             Enviar
           </Button>
           <Text style={styles.error}>{err}</Text>
           <Button onPress={() => navigation.navigate("SignIn")}>
             Voltar ao Login
           </Button>
-
           <Button onPress={() => navigation.navigate("SignIn")}>
             Problemas no Cadastro? Clique aqui!
           </Button>

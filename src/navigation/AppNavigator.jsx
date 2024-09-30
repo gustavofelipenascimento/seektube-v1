@@ -21,6 +21,7 @@ import SenhaSeek from "../screens/SenhaSeek";
 import ApiScreenTest from "../screens/ApiScreenTest";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { useWindowDimensions } from "react-native";
+import TermosScreen from "../screens/TermosScreen";
 
 // Criação do Stack e Drawer
 const Stack = createNativeStackNavigator();
@@ -79,11 +80,52 @@ export default function AppNavigator() {
       <NavigationContainer theme={themeNavigation}>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="SignIn" component={SignInScreen} />
-          <Stack.Screen name="SignUp" component={SignUpScreen} />
-          <Stack.Screen name="Feedback" component={FeedbackScreen} />
-          <Stack.Screen name="SenhaSeek" component={SenhaSeek} />
+          <Stack.Screen
+            name="SignIn"
+            component={SignInScreen}
+            options={{
+              headerShown: true,
+              headerTransparent: true,
+              headerTitle: "",
+            }}
+          />
+          <Stack.Screen
+            name="SignUp"
+            component={SignUpScreen}
+            options={{
+              headerShown: true,
+              headerTransparent: true,
+              headerTitle: "",
+            }}
+          />
+          <Stack.Screen
+            name="Feedback"
+            component={FeedbackScreen}
+            options={{
+              headerShown: true,
+              headerTransparent: true,
+              headerTitle: "",
+            }}
+          />
+          <Stack.Screen
+            name="SenhaSeek"
+            component={SenhaSeek}
+            options={{
+              headerShown: true,
+              headerTransparent: true,
+              headerTitle: "",
+            }}
+          />
           <Stack.Screen name="App" component={DrawerNavigator} />
+          <Stack.Screen
+            name="Terms"
+            component={TermosScreen}
+            options={{
+              headerShown: true,
+              headerTransparent: true,
+              headerTitle: "",
+            }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
