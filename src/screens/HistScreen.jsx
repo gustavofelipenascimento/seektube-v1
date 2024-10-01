@@ -5,7 +5,7 @@ export default function HistScreen() {
   return( 
   <Surface>
     <View>
-        <Text>HistScreen</Text>
+        <Text>HistScren</Text>
     </View>
   </Surface>
   )
