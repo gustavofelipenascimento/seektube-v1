@@ -36,7 +36,7 @@ export default function SeekScreen({navigation}) {
           Limpar
         </Button>
 
-        <Button onPress={() => navigation.navigate("SignIn")} mode="contained-tonal" style={styles.seek}>
+        <Button onPress={() => navigation.navigate("ApiTest")} mode="contained-tonal" style={styles.seek}>
           Seek!
         </Button>
     </View>
