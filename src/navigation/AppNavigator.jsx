@@ -21,7 +21,8 @@ import SenhaSeek from "../screens/SenhaSeek";
 import ApiScreenTest from "../screens/ApiScreenTest";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { useWindowDimensions } from "react-native";
-import TermosScreen from "../screens/TermosScreen";
+import TermosScreen from "../screens/PrivacidadeScreen";
+import PrivacidadeScreen from "../screens/TermosScreen";
 
 // Criação do Stack e Drawer
 const Stack = createNativeStackNavigator();
@@ -63,6 +64,19 @@ function DrawerNavigator() {
       <Drawer.Screen name="ConfirmaSenSeek" component={ConfirmaSenSeek} />
       <Drawer.Screen name="Sobre" component={SobreScreen} />
       <Drawer.Screen name="ApiTest" component={ApiScreenTest} />
+
+      <Drawer.Screen
+        name="TradeTheme"
+        component={() => (
+          <View style={{ padding: 16 }}>
+            <TradeTheme />
+          </View>
+        )}
+        options={{
+          drawerLabel: () => null, // Oculta o rótulo no Drawer
+          title: null, // Sem título
+        }}
+      />
     </Drawer.Navigator>
   );
 }
@@ -120,6 +134,15 @@ export default function AppNavigator() {
           <Stack.Screen
             name="Terms"
             component={TermosScreen}
+            options={{
+              headerShown: true,
+              headerTransparent: true,
+              headerTitle: "",
+            }}
+          />
+          <Stack.Screen
+            name="Privas"
+            component={PrivacidadeScreen}
             options={{
               headerShown: true,
               headerTransparent: true,

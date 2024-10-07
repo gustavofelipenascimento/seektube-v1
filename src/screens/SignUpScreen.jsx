@@ -83,7 +83,7 @@ export default function RegisterScreen({ navigation }) {
       return false;
     }
     return true;
-  }
+  };
 
   async function firebaseRegister() {
     try {
@@ -149,12 +149,11 @@ export default function RegisterScreen({ navigation }) {
 
     if (form) {
       firebaseRegister();
-    }
-    else if (!checked) {
+    } else if (!checked) {
       setError("Você deve aceitar os termos e condições para continuar.");
       return;
     }
-  }
+  };
 
   function validateEmail(email) {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -263,9 +262,16 @@ export default function RegisterScreen({ navigation }) {
                 Aceito os termos.{" "}
                 <Text
                   style={styles.link}
+                  onPress={() => navigation.navigate("Privas")}
+                >
+                  Ver termos
+                </Text>
+                <Text> e </Text>
+                <Text
+                  style={styles.link}
                   onPress={() => navigation.navigate("Terms")}
                 >
-                  Ver termos e condições de uso.
+                  Política de Privacidade
                 </Text>
               </Text>
             </View>
