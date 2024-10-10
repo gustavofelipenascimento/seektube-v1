@@ -6,7 +6,7 @@ import {
   ThemeDarkNavigation,
   ThemeLightNavigation,
 } from "../config/theme";
-import { useTheme } from "../contexts/ThemeContexts";
+import { useTheme } from "../contexts/ThemeContexts"; // Importando o Contexto
 import { Provider } from "react-native-paper";
 import HomeScreen from "../screens/HomeScreen";
 import SkNewsScreen from "../screens/SkNewsScreen";
@@ -19,8 +19,12 @@ import FeedbackScreen from "../screens/FeedbackScreen";
 import ConfirmaSenSeek from "../screens/ConfirmaSenSeek";
 import SenhaSeek from "../screens/SenhaSeek";
 import ApiScreenTest from "../screens/ApiScreenTest";
-import { createDrawerNavigator } from "@react-navigation/drawer";
-import { useWindowDimensions } from "react-native";
+import {
+  createDrawerNavigator,
+  DrawerContentScrollView,
+  DrawerItemList,
+} from "@react-navigation/drawer";
+import { useWindowDimensions, View, Switch } from "react-native";
 import TermosScreen from "../screens/PrivacidadeScreen";
 import PrivacidadeScreen from "../screens/TermosScreen";
 
@@ -28,9 +32,8 @@ import PrivacidadeScreen from "../screens/TermosScreen";
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
-// Função para o DrawerNavigator
 function DrawerNavigator() {
-  const { isDarkTheme } = useTheme();
+  const { isDarkTheme, toggleTheme } = useTheme();
   const dimensions = useWindowDimensions();
 
   const theme = isDarkTheme ? ThemeDark : ThemeLight;
@@ -41,14 +44,15 @@ function DrawerNavigator() {
       screenOptions={{
         drawerType: isWeb ? "permanent" : "front",
         swipeEnabled: !isWeb,
-        headerTitle: "", // Remove o título
-        headerTransparent: true, // Deixa o fundo do header transparente
-        headerTintColor: theme.colors.text, // Muda a cor do ícone do menu
+        headerTitle: "",
+        headerTransparent: true,
+        headerTintColor: theme.colors.text,
         drawerStyle: {
           backgroundColor: theme.colors.background,
         },
         drawerContentStyle: {
-          paddingVertical: "50%",
+          paddingVertical: "75%",
+          padding: "25%",
         },
         drawerActiveTintColor: theme.colors.primary,
         drawerInactiveTintColor: theme.colors.text,
@@ -57,6 +61,7 @@ function DrawerNavigator() {
           fontWeight: "bold",
         },
       }}
+      drawerContent={(props) => <CustomDrawerContent {...props} />}
     >
       <Drawer.Screen name="Seek" component={SeekScreen} />
       <Drawer.Screen name="News" component={SkNewsScreen} />
@@ -64,25 +69,37 @@ function DrawerNavigator() {
       <Drawer.Screen name="ConfirmaSenSeek" component={ConfirmaSenSeek} />
       <Drawer.Screen name="Sobre" component={SobreScreen} />
       <Drawer.Screen name="ApiTest" component={ApiScreenTest} />
-
-      <Drawer.Screen
-        name="TradeTheme"
-        component={() => (
-          <View style={{ padding: 16 }}>
-            <TradeTheme />
-          </View>
-        )}
-        options={{
-          drawerLabel: () => null, // Oculta o rótulo no Drawer
-          title: null, // Sem título
-        }}
-      />
     </Drawer.Navigator>
   );
 }
-//FeedBack, Sobre e API SCREEN para fazer(problema não é mais meu se fodam, a não ser que tenha erro) <3 NÃO ERREM
 
-// Função principal de navegação, onde o Drawer é filho do Stack
+function CustomDrawerContent(props) {
+  const { isDarkTheme, toggleTheme } = useTheme();
+
+  return (
+    <DrawerContentScrollView {...props}>
+      <DrawerItemList {...props} />
+      <View
+        style={{
+          padding: 20,
+          position: "relative",
+          top: "99%",
+          alignContent: "flex-end",
+          alignItems: "flex-end",
+          justifyContent: "flex-end",
+        }}
+      >
+      <Switch
+          value={isDarkTheme}
+          onValueChange={toggleTheme}
+          thumbColor={isDarkTheme ? "#757aff" : "#fff"}
+          trackColor={{ false: "#767577", true: "#f4f4f4" }}
+        />
+      </View>
+    </DrawerContentScrollView>
+  );
+}
+
 export default function AppNavigator() {
   const { isDarkTheme } = useTheme();
   const themeNavigation = isDarkTheme

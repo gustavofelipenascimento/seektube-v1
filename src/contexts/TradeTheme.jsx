@@ -8,7 +8,7 @@ export default function TradeTheme() {
 
   return (
       <Button mode="contained" onPress={toggleTheme} style={styles.button}>
-        Alternar Tema
+        {isDarkTheme ? 'Mudar para Tema Claro' : 'Mudar para Tema Escuro'}
       </Button>
   );
 }
