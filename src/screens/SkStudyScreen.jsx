@@ -1,18 +1,24 @@
 import { Button, Surface, TextInput, } from "react-native-paper";
 import styles from "../config/styles";
 import { View } from "react-native";
-import TradeTheme from "../contexts/TradeTheme";
 import { Image } from "expo-image";
+import { useTheme } from "../contexts/ThemeContexts";
 
 
 
 export default function SkStudyScreen({navigation}) {
+  const { isDarkTheme} = useTheme();
+
+  const imageSource = isDarkTheme
+    ? require("../img/study-light.png")
+    : require("../img/seekstudy.png");
+
   return (
     <Surface style={styles.container}>
       <View style={styles.innerContainer}>
       <Image
               style={styles.image}
-              source={require("../img/seekstudy.png")}
+              source={imageSource}
             />
 
 

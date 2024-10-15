@@ -5,11 +5,17 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import styles from "../config/styles";
 import { Surface, TextInput, Button, Text } from "react-native-paper";
 import { Image } from "expo-image";
+import { useTheme } from "../contexts/ThemeContexts";
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const { isDarkTheme} = useTheme();
+
+  const imageSource = isDarkTheme
+    ? require("../img/seek-light.png")
+    : require("../img/seektube.png");
 
   const handleLogin = () => {
     signInWithEmailAndPassword(auth, email, password)
@@ -44,7 +50,7 @@ export default function LoginScreen({ navigation }) {
   return (
       <Surface style={styles.container}>
         <View style={styles.innerContainer}>
-          <Image style={styles.image} source={require("../img/seektube.png")} />
+          <Image style={styles.image} source={imageSource} />
 
           <Text style={styles.title}>Faça Login</Text>
 

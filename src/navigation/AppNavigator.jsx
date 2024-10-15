@@ -7,7 +7,7 @@ import {
   ThemeLightNavigation,
 } from "../config/theme";
 import { useTheme } from "../contexts/ThemeContexts"; // Importando o Contexto
-import { Provider } from "react-native-paper";
+import { Provider, Switch } from "react-native-paper";
 import HomeScreen from "../screens/HomeScreen";
 import SkNewsScreen from "../screens/SkNewsScreen";
 import SobreScreen from "../screens/SobreScreen";
@@ -24,7 +24,7 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
-import { useWindowDimensions, View, Switch } from "react-native";
+import { useWindowDimensions, View } from "react-native";
 import TermosScreen from "../screens/PrivacidadeScreen";
 import PrivacidadeScreen from "../screens/TermosScreen";
 
@@ -90,12 +90,9 @@ function CustomDrawerContent(props) {
           justifyContent: "flex-end",
         }}
       >
-      <Switch
+        <Switch
           value={isDarkTheme}
           onValueChange={toggleTheme}
-          thumbColor={isDarkTheme ? "#757aff" : "#fff"}
-          trackColor={{ false: "#767577", true: "#f4f4f4" }}
-          col
         />
       </View>
     </DrawerContentScrollView>

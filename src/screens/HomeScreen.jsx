@@ -1,14 +1,20 @@
 import { Avatar, Button, Surface } from "react-native-paper";
 import styles from "../config/styles";
 import { View } from "react-native";
-import TradeTheme from "../contexts/TradeTheme";
 import { Image } from "expo-image";
+import { useTheme } from "../contexts/ThemeContexts";
 
 export default function HomeScreen({ navigation }) {
+  const { isDarkTheme} = useTheme();
+
+  const imageSource = isDarkTheme
+    ? require("../img/seek-light.png")
+    : require("../img/seektube.png");
+
   return (
     <Surface style={styles.container}>
       <View style={styles.innerContainer}>
-        <Image style={styles.image} source={require("../img/seektube.png")} />
+        <Image style={styles.image} source={imageSource} />
 
         <Button
           onPress={() => navigation.navigate("SignIn")}
