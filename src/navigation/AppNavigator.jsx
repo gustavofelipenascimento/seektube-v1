@@ -59,6 +59,7 @@ function DrawerNavigator() {
         drawerLabelStyle: {
           fontSize: 16,
           fontWeight: "bold",
+          marginStart: 10,
         },
       }}
       drawerContent={(props) => <CustomDrawerContent {...props} />}
@@ -94,6 +95,7 @@ function CustomDrawerContent(props) {
           onValueChange={toggleTheme}
           thumbColor={isDarkTheme ? "#757aff" : "#fff"}
           trackColor={{ false: "#767577", true: "#f4f4f4" }}
+          col
         />
       </View>
     </DrawerContentScrollView>
