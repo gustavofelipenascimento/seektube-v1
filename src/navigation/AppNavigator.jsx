@@ -1,3 +1,4 @@
+import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import {
@@ -6,8 +7,9 @@ import {
   ThemeDarkNavigation,
   ThemeLightNavigation,
 } from "../config/theme";
-import { useTheme } from "../contexts/ThemeContexts"; // Importando o Contexto
-import { Provider, Switch } from "react-native-paper";
+import { useTheme } from "../contexts/ThemeContexts";
+import { Provider, Switch, Avatar, Title, Button } from "react-native-paper";
+import { View } from "react-native";
 import HomeScreen from "../screens/HomeScreen";
 import SkNewsScreen from "../screens/SkNewsScreen";
 import SobreScreen from "../screens/SobreScreen";
@@ -19,21 +21,21 @@ import FeedbackScreen from "../screens/FeedbackScreen";
 import ConfirmaSenSeek from "../screens/ConfirmaSenSeek";
 import SenhaSeek from "../screens/SenhaSeek";
 import ApiScreenTest from "../screens/ApiScreenTest";
+import ProfileScreen from "../screens/ProfileScreen";
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
-import { useWindowDimensions, View } from "react-native";
+import { useWindowDimensions } from "react-native";
 import TermosScreen from "../screens/PrivacidadeScreen";
 import PrivacidadeScreen from "../screens/TermosScreen";
 
-// Criação do Stack e Drawer
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
 function DrawerNavigator() {
-  const { isDarkTheme, toggleTheme } = useTheme();
+  const { isDarkTheme } = useTheme();
   const dimensions = useWindowDimensions();
 
   const theme = isDarkTheme ? ThemeDark : ThemeLight;
@@ -50,17 +52,6 @@ function DrawerNavigator() {
         drawerStyle: {
           backgroundColor: theme.colors.background,
         },
-        drawerContentStyle: {
-          paddingVertical: "75%",
-          padding: "25%",
-        },
-        drawerActiveTintColor: theme.colors.primary,
-        drawerInactiveTintColor: theme.colors.text,
-        drawerLabelStyle: {
-          fontSize: 16,
-          fontWeight: "bold",
-          marginStart: 10,
-        },
       }}
       drawerContent={(props) => <CustomDrawerContent {...props} />}
     >
@@ -70,6 +61,7 @@ function DrawerNavigator() {
       <Drawer.Screen name="ConfirmaSenSeek" component={ConfirmaSenSeek} />
       <Drawer.Screen name="Sobre" component={SobreScreen} />
       <Drawer.Screen name="ApiTest" component={ApiScreenTest} />
+      <Drawer.Screen name="Profile" component={ProfileScreen} />
     </Drawer.Navigator>
   );
 }
@@ -79,21 +71,28 @@ function CustomDrawerContent(props) {
 
   return (
     <DrawerContentScrollView {...props}>
-      <DrawerItemList {...props} />
-      <View
-        style={{
-          padding: 20,
-          position: "relative",
-          top: "99%",
-          alignContent: "flex-end",
-          alignItems: "flex-end",
-          justifyContent: "flex-end",
-        }}
-      >
-        <Switch
-          value={isDarkTheme}
-          onValueChange={toggleTheme}
+      {/* Avatar e Nome do Usuário */}
+      <View style={{ padding: 20, alignItems: "center" }}>
+        <Avatar.Image
+          size={80}
+          source={{ uri: "https://example.com/profile-image.jpg" }} // Substitua com a URL da imagem do usuário
         />
+        <Title style={{ marginTop: 10 }}>Nome do Usuário</Title>
+        <Button
+          onPress={() => props.navigation.navigate("Profile")}
+          mode="contained"
+          style={{ marginTop: 10 }}
+        >
+          Ver Perfil
+        </Button>
+      </View>
+
+      {/* Lista de itens do Drawer */}
+      <DrawerItemList {...props} />
+
+      {/* Switch para alternar o tema */}
+      <View style={{ padding: 20 }}>
+        <Switch value={isDarkTheme} onValueChange={toggleTheme} />
       </View>
     </DrawerContentScrollView>
   );

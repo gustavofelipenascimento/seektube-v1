@@ -15,7 +15,6 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../config/firebase";
 import { collection, doc, setDoc } from "firebase/firestore";
 import bcrypt from "bcryptjs";
-import { useTheme } from "../contexts/ThemeContexts";
 
 export default function RegisterScreen({ navigation }) {
   const [email, setEmail] = useState("");
@@ -26,11 +25,6 @@ export default function RegisterScreen({ navigation }) {
   const [estado, setEstado] = useState("");
   const [err, setError] = useState("");
   const [checked, setChecked] = useState(false);
-  const { isDarkTheme} = useTheme();
-
-  const imageSource = isDarkTheme
-    ? require("../img/seek-light.png")
-    : require("../img/seektube.png");
 
   const estados = [
     { label: "Selecione seu estado", value: "" },
@@ -182,7 +176,7 @@ export default function RegisterScreen({ navigation }) {
     <ScrollView>
       <Surface style={styles.container}>
         <View style={styles.innerContainer}>
-          <Image style={styles.image} source={imageSource} />
+          <Image style={styles.image} source={require("../img/seektube.png")} />
           <Text style={styles.title}>Cadastre-se!</Text>
           <Text style={styles.inputxt}>Nome:</Text>
           <TextInput
