@@ -293,6 +293,54 @@ const styles = StyleSheet.create({
   link: {
     color: "#7979FC",
   },
+  userName: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  editButton: {
+    marginTop: 20,
+  },
+  logoutButton: {
+    marginTop: 10,
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10,
+    width: '80%',
+    alignItems: 'center',
+  },
+  imagePreview: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    marginBottom: 20,
+  },
+  modalActions: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+  },
+  confirmButton: {
+    flex: 1,
+    marginRight: 10,
+  },
+  cancelButton: {
+    flex: 1,
+    marginLeft: 10,
+  },
+  avatar: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    marginBottom: 20,
+  },
 });
 
 export default styles;
