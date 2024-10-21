@@ -159,7 +159,7 @@ function DrawerNavigator({ navigation }) {
       <Drawer.Screen name="Altere sua Senha" component={ConfirmaSenSeek} />
       <Drawer.Screen name="Sobre" component={SobreScreen} />
       <Drawer.Screen name="ApiTest" component={ApiScreenTest} />
-      <Drawer.Screen name="Perfil do Usuário" component={ProfileScreen} />
+      <Drawer.Screen options={{}} name="Profile" component={ProfileScreen} />
     </Drawer.Navigator>
   );
 }
