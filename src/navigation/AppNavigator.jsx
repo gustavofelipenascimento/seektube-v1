@@ -156,10 +156,10 @@ function DrawerNavigator({ navigation }) {
       <Drawer.Screen name="Seek" component={SeekScreen} />
       <Drawer.Screen name="News" component={SkNewsScreen} />
       <Drawer.Screen name="Study" component={SkStudyScreen} />
-      <Drawer.Screen name="ConfirmaSenSeek" component={ConfirmaSenSeek} />
+      <Drawer.Screen name="Altere sua Senha" component={ConfirmaSenSeek} />
       <Drawer.Screen name="Sobre" component={SobreScreen} />
       <Drawer.Screen name="ApiTest" component={ApiScreenTest} />
-      <Drawer.Screen name="Profile" component={ProfileScreen} />
+      <Drawer.Screen name="Perfil do Usuário" component={ProfileScreen} />
     </Drawer.Navigator>
   );
 }

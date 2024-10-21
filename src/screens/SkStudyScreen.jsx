@@ -42,7 +42,7 @@ export default function SkStudyScreen({navigation}) {
           Limpar
         </Button>
 
-        <Button onPress={() => navigation.navigate("SignIn")} mode="contained-tonal" style={styles.study}>
+        <Button onPress={() => navigation.navigate("SignIn")} mode="contained" style={styles.study}>
           Seek!
         </Button>
     </View>

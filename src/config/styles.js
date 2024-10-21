@@ -6,6 +6,25 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
+
+  termos: {
+    marginTop: "10%",
+  },
+
+  parag: {
+    paddingBottom: 10,
+    paddingTop: 10, 
+    textAlign: "justify"
+  },
+  sub: {
+    fontWeight: "bold"
+  },
+  titleUso: {
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginTop: "5%",
+  },
   separator: {
     marginVertical: 30,
     height: 1,
@@ -341,6 +360,8 @@ const styles = StyleSheet.create({
     borderRadius: 60,
     marginBottom: 20,
   },
+
+
 });
 
 export default styles;

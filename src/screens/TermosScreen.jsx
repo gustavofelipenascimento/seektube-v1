@@ -6,10 +6,14 @@ export default function TermosScreen() {
   return (
     <ScrollView>
       <Surface style={styles.container}>
-        <View>
-          <Text style={styles.title}>Termos de Uso</Text>
-          <Text>1. Sobre nossos termos</Text>
-          <Text>
+        <View >
+
+       
+          <Text style={styles.titleUso}>Termos de Uso</Text>
+
+          <View style={styles.termos}>
+          <Text style={styles.sub}>1. Sobre nossos termos</Text>
+          <Text style={styles.parag}>
             Ao acessar o aplicativo SeekTube, concorda em cumprir estes termos
             de serviço, todas as leis e regulamentos aplicáveis e concorda que é
             responsável pelo cumprimento de todas as leis locais aplicáveis. Se
@@ -18,8 +22,8 @@ export default function TermosScreen() {
             protegidos pelas leis de direitos autorais e marcas comerciais
             aplicáveis.
           </Text>
-          <Text>2. Uso de Licença </Text>
-          <Text>
+          <Text style={styles.sub}>2. Uso de Licença </Text>
+          <Text style={styles.parag}>
             É concedida permissão para baixar temporariamente uma cópia dos
             materiais (informações ou software) no aplicativo SeekTube , apenas
             para visualização transitória pessoal e não comercial. Esta é a
@@ -37,8 +41,8 @@ export default function TermosScreen() {
             licença, você deve apagar todos os materiais baixados em sua posse,
             seja em formato eletrônico ou impresso.
           </Text>
-          <Text>3. Isenção de Responsabilidade</Text>
-          <Text>
+          <Text style={styles.sub}>3. Isenção de Responsabilidade</Text>
+          <Text style={styles.parag}>
             Os materiais no aplicativo da SeekTube são fornecidos 'como estão'.
             SeekTube não oferece garantias, expressas ou implícitas, e, por este
             meio, isenta e nega todas as outras garantias, incluindo, sem
@@ -50,8 +54,8 @@ export default function TermosScreen() {
             aplicativo ou de outra forma relacionado a esses materiais ou em
             aplicativos vinculados a este aplicativo.
           </Text>
-          <Text>4. Limitações</Text>
-          <Text>
+          <Text style={styles.sub}>4. Limitações</Text>
+          <Text style={styles.parag}>
             Em nenhum caso o SeekTube ou seus fornecedores serão responsáveis
             por quaisquer danos (incluindo, sem limitação, danos por perda de
             dados ou lucro ou devido a interrupção dos negócios) decorrentes do
@@ -62,8 +66,8 @@ export default function TermosScreen() {
             implícitas, ou limitações de responsabilidade por danos consequentes
             ou incidentes, essas limitações podem não se aplicar a você.
           </Text>
-          <Text>5. Precisão dos materias</Text>
-          <Text>
+          <Text style={styles.sub}>5. Precisão dos materias</Text>
+          <Text style={styles.parag}>
             Os materiais exibidos no aplicativo da SeekTube podem incluir erros
             técnicos, tipográficos ou fotográficos. SeekTube não garante que
             qualquer material em seu aplicativo seja preciso, completo ou atual.
@@ -71,29 +75,29 @@ export default function TermosScreen() {
             aplicativo a qualquer momento, sem aviso prévio. No entanto,
             SeekTube não se compromete a atualizar os materiais.
           </Text>
-          <Text>6. Links</Text>
-          <Text>
+          <Text style={styles.sub}>6. Links</Text>
+          <Text style={styles.parag}>
             O SeekTube não analisou todos os sites vinculados ao seu aplicativo
             e não é responsável pelo conteúdo de nenhum site vinculado. A
             inclusão de qualquer link não implica endosso por SeekTube do site.
             O uso de qualquer site vinculado é por conta e risco do usuário.{" "}
           </Text>
-          <Text>7. Modificações</Text>
-          <Text>
+          <Text style={styles.sub}>7. Modificações</Text>
+          <Text style={styles.parag}>
             O SeekTube pode revisar estes termos de serviço do aplicativo a
             qualquer momento, sem aviso prévio. Ao usar este aplicativo, você
             concorda em ficar vinculado à versão atual destes termos de serviço.
           </Text>
-          <Text>8. Lei aplicável</Text>
-          <Text>
+          <Text style={styles.sub}>8. Lei aplicável</Text>
+          <Text style={styles.parag}>
             Estes termos e condições são regidos e interpretados de acordo com
             as leis do SeekTube e você se submete irrevogavelmente à jurisdição
             exclusiva dos tribunais naquele estado ou localidade.
           </Text>
-          <Text>
+          <Text style={styles.sub}>
             9. Utilização de APIs de Terceiros e Conformidade com a LGPD
           </Text>
-          <Text>
+          <Text style={styles.parag}>
             Nosso aplicativo de busca utiliza APIs de terceiros para fornecer
             seus serviços. Ao utilizar essas APIs, seguimos rigorosamente os
             termos de uso e políticas de privacidade de cada provedor de API,
@@ -104,6 +108,7 @@ export default function TermosScreen() {
             condições das APIs de terceiros e reconhece que seus dados poderão
             ser processados de acordo com essas políticas.
           </Text>
+          </View>
         </View>
       </Surface>
     </ScrollView>

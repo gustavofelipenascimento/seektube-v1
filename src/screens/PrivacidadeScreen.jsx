@@ -7,10 +7,12 @@ export default function PrivacidadeScreen() {
     <ScrollView>
       <Surface style={styles.container}>
         <View>
-          <Text style={styles.title}>Política de Privacidade</Text>
+          <Text style={styles.titleUso}>Política de Privacidade</Text>
+
           <Text style={styles.separator}></Text>
-          <Text>1. Sobre nossos termos</Text>
-          <Text>
+
+          <Text style={styles.sub}>1. Sobre nossos termos</Text>
+          <Text style={styles.parag}>
             A sua privacidade é importante para nós. É política do SeekTube
             respeitar a sua privacidade em relação a qualquer informação sua que
             possamos coletar no aplicativo SeekTube, e outros serviços que
@@ -53,26 +55,48 @@ export default function PrivacidadeScreen() {
             nossos parceiros afiliados ofereçam qualquer promoção que pode
             fornecê-lo para fazer uma compra.
           </Text>
-          <Text>2. Compromisso do Usuario</Text>
-          <Text>
+          <Text style={styles.sub}>2. Compromisso do Usuario</Text>
+          <Text style={styles.parag}>
             O usuário se compromete a fazer uso adequado dos conteúdos e da
             informação que o SeekTube oferece no aplicativo e com caráter
-            enunciativo, mas não limitativo: A) Não se envolver em atividades
-            que sejam ilegais ou contrárias à boa fé a à ordem pública; B) Não
+            enunciativo, mas não limitativo:
+            </Text>
+            
+            <Text style={styles.parag}>
+              A) Não se envolver em atividades
+            que sejam ilegais ou contrárias à boa fé a à ordem pública;
+            </Text>
+
+
+            <Text style={styles.parag}>
+              B) Não
             difundir propaganda ou conteúdo de natureza racista, xenofóbica, Bet
             Nacional ou azar, qualquer tipo de pornografia ilegal, de apologia
-            ao terrorismo ou contra os direitos humanos; C) Não causar danos aos
+            ao terrorismo ou contra os direitos humanos;
+            </Text>
+
+            <Text style={styles.parag}>
+              C) Não causar danos aos
             sistemas físicos (hardwares) e lógicos (softwares) do SeekTube, de
             seus fornecedores ou terceiros, para introduzir ou disseminar vírus
             informáticos ou quaisquer outros sistemas de hardware ou software
-            que sejam capazes de causar danos anteriormente mencionados. D) Não
+            que sejam capazes de causar danos anteriormente mencionados.
+             </Text>
+
+            <Text style={styles.parag}> D) Não
             utilizar scripts de spam e ou malwares para prejudicar o
-            funcionamento dos servidores da ferramenta de busca SeekTube. E) Não
+            funcionamento dos servidores da ferramenta de busca SeekTube.
+              </Text>
+
+            <Text style={styles.parag}> 
+              E) Não
             utilizar da ferramenta de busca SeekTube para crimes cibernéticos ou
-            quaisquer outros usos com intenções de natureza maliciosa.
-          </Text>
-          <Text>3. Dados coletados </Text>
-          <Text>
+            quaisquer outros usos com intenções de natureza maliciosa. 
+            </Text>
+   
+         
+          <Text style={styles.sub}>3. Dados coletados </Text>
+          <Text style={styles.parag}>
             É importante ressaltar que o aplicativo SeekTube, no ato do
             cadastro, coleta alguns dados. Sendo os dados coletados e seus
             respectivos fins: Data de nascimento do usuário: esse é um dos dados
@@ -88,17 +112,17 @@ export default function PrivacidadeScreen() {
             aprimoramento do nosso algoritmo de recomendação em relação ao
             conteúdo — personalizado por esses dados — que chega ao usuário.
           </Text>
-          <Text>4. Mais informações </Text>
-          <Text>
+          <Text style={styles.sub}>4. Mais informações </Text>
+          <Text style={styles.parag}>
             Esperemos que esteja esclarecido e, como mencionado anteriormente,
             se houver algo que você não tem certeza se precisa ou não,
             geralmente é mais seguro deixar os cookies ativados, caso interaja
             com um dos recursos que você usa em nosso aplicativo.{" "}
           </Text>
-          <Text>
+          <Text style={styles.sub}>
             5. Utilização de APIs de Terceiros e Conformidade com a LGPD{" "}
           </Text>
-          <Text>
+          <Text style={styles.parag}>
             Nosso aplicativo de busca utiliza APIs de terceiros para fornecer
             seus serviços. Ao utilizar essas APIs, seguimos rigorosamente os
             termos de uso e políticas de privacidade de cada provedor de API,

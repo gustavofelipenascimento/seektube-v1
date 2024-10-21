@@ -155,10 +155,10 @@ export default function ProfileScreen({ navigation }) {
       </TouchableOpacity>
 
       <Title style={styles.title}>Perfil</Title>
-      <Text>Nome: {userData.nome}</Text>
-      <Text>Email: {userData.email}</Text>
-      <Text>Estado: {userData.estado}</Text>
-      <Text>Data de Nascimento: {userData.dtnasc}</Text>
+      <Text style={styles.profileInfo}>Nome: {userData.nome}</Text>
+      <Text style={styles.profileInfo}>Email: {userData.email}</Text>
+      <Text style={styles.profileInfo}>Estado: {userData.estado}</Text>
+      <Text style={styles.profileInfo}>Data de Nascimento: {userData.dtnasc}</Text>
 
       <Button
         mode="outlined"
