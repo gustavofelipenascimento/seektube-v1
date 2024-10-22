@@ -12,9 +12,9 @@ import {
   ActivityIndicator,
 } from "react-native-paper";
 import * as ImagePicker from "expo-image-picker";
-import * as FileSystem from "expo-file-system"; // Importar FileSystem para salvar a imagem localmente
 import { getAuth } from "firebase/auth";
 import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import styles from "../config/styles";
 
 export default function ProfileScreen({ navigation }) {
@@ -47,7 +47,7 @@ export default function ProfileScreen({ navigation }) {
             email: userData.email || "Email não disponível",
             estado: userData.estado || "Estado não disponível",
             dtnasc: userData.dtnasc || "Data de nascimento não disponível",
-            avatar: userData.localProfileImage || "", // Pega a imagem salva localmente
+            avatar: userData.avatar || "", // Agora usamos a URL da imagem no Firebase Storage
           });
         } else {
           Alert.alert("Erro", "Usuário não encontrado.");
@@ -58,7 +58,7 @@ export default function ProfileScreen({ navigation }) {
     fetchUserData();
   }, [auth.currentUser]);
 
-  // Função para solicitar permissões de acesso à galeria
+  // Solicitar permissões de acesso à galeria
   const requestPermissions = async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (status !== "granted") {
@@ -73,7 +73,7 @@ export default function ProfileScreen({ navigation }) {
     requestPermissions();
   }, []);
 
-  // Função para selecionar imagem da galeria
+  // Selecionar imagem da galeria
   const handleImagePick = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -82,47 +82,42 @@ export default function ProfileScreen({ navigation }) {
       quality: 1,
     });
 
-    if (!result.cancelled) {
-      setSelectedImage(result.uri);
+    if (!result.canceled) {
+      const selectedAsset = result.assets[0];
+      setSelectedImage(selectedAsset.uri);
       setIsDialogVisible(true);
     }
   };
 
-  // Função para fazer o upload da imagem e salvar localmente
+  // Upload da imagem para o Firebase Storage
   const handleUploadImage = async () => {
-    console.log("Iniciando upload da imagem...");
     if (selectedImage) {
-      console.log("Imagem selecionada:", selectedImage);
       setIsUploading(true);
       const user = auth.currentUser;
+      const storage = getStorage();
 
       try {
-        // Definir o caminho local onde a imagem será salva
-        const fileName = `${user.uid}_profile.jpg`; // Nome do arquivo de imagem
-        const fileUri = `${FileSystem.documentDirectory}${fileName}`; // Caminho completo do arquivo
+        // Ler o arquivo como blob
+        const response = await fetch(selectedImage);
+        const blob = await response.blob();
 
-        // Salvar a imagem localmente
-        await FileSystem.copyAsync({
-          from: selectedImage,
-          to: fileUri,
-        });
+        // Criar uma referência no Firebase Storage
+        const storageRef = ref(storage, `profileImages/${user.uid}.jpg`);
 
-        // Verificar se o arquivo foi realmente salvo
-        const fileInfo = await FileSystem.getInfoAsync(fileUri);
-        console.log("Informações do arquivo salvo:", fileInfo);
+        // Fazer o upload
+        await uploadBytes(storageRef, blob);
 
-        if (!fileInfo.exists) {
-          throw new Error("Erro ao salvar a imagem localmente.");
-        }
+        // Obter a URL de download
+        const downloadURL = await getDownloadURL(storageRef);
 
-        // Atualizar o Firestore com o caminho local da imagem
+        // Atualizar o Firestore com a URL da imagem
         const userDocRef = doc(db, "usuarios", user.uid);
-        await updateDoc(userDocRef, { localProfileImage: fileUri });
+        await updateDoc(userDocRef, { avatar: downloadURL });
 
         // Atualizar estado para refletir a nova imagem no frontend
         setUserData((prevData) => ({
           ...prevData,
-          avatar: fileUri,
+          avatar: downloadURL,
         }));
 
         Alert.alert("Sucesso", "Imagem de perfil alterada com sucesso!");
@@ -132,10 +127,8 @@ export default function ProfileScreen({ navigation }) {
         Alert.alert("Erro", "Não foi possível alterar a imagem de perfil.");
         console.error("Erro ao fazer upload da imagem:", error);
       } finally {
-        setIsUploading(false); // Certificar que o estado de upload será atualizado
+        setIsUploading(false);
       }
-    } else {
-      console.log("Nenhuma imagem selecionada.");
     }
   };
 
@@ -158,7 +151,9 @@ export default function ProfileScreen({ navigation }) {
       <Text style={styles.profileInfo}>Nome: {userData.nome}</Text>
       <Text style={styles.profileInfo}>Email: {userData.email}</Text>
       <Text style={styles.profileInfo}>Estado: {userData.estado}</Text>
-      <Text style={styles.profileInfo}>Data de Nascimento: {userData.dtnasc}</Text>
+      <Text style={styles.profileInfo}>
+        Data de Nascimento: {userData.dtnasc}
+      </Text>
 
       <Button
         mode="outlined"
