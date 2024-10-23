@@ -7,6 +7,7 @@ import { Image } from "expo-image";
 export default function ApiScreenTest({ route, navigation }) {
   // Extraindo o link passado pela SeekScreen
   const { url } = route.params;
+  const { apiResponse } = route.params;
 
   return (
     <Surface style={styles.container}>
@@ -20,6 +21,14 @@ export default function ApiScreenTest({ route, navigation }) {
         <TextInput
           placeholder="Insira um link..."
           value={url} // Define o valor do input como o link recebido
+          style={styles.input}
+          underlineColor="transparent"
+          activeUnderlineColor="transparent"
+        />
+
+        <TextInput
+          placeholder="links"
+          value={JSON.stringify(apiResponse)} // Define o valor do input como o link recebido
           style={styles.input}
           underlineColor="transparent"
           activeUnderlineColor="transparent"

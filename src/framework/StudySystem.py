@@ -4,10 +4,7 @@ from datetime import datetime
 from youtube_transcript_api import YouTubeTranscriptApi, TranscriptsDisabled, NoTranscriptFound
 import ollama
 import requests
-from flask import Flask, jsonify, request
-
-app = Flask(__name__)
-
+ 
 # Defina sua chave de API aqui
 API_KEY = 'AIzaSyDxiS8ubA_OQqGb5FUd2r1Ebsyi_5vsK3c'
  
@@ -142,7 +139,7 @@ def get_video_details(video_url):
  
             baseUrl='https://customsearch.googleapis.com/customsearch/v1'
             apikey= 'AIzaSyBuR1js8SgQvg4C5MSDMox9zfXVcunY4x0'
-            cx = 'c1ad8ebaf73c341f1'
+            cx = '64ae854ef96d3472d'
             txt = f'{summary} {categoria}'
             chars = "',.!?[]"
             textin = txt.translate(str.maketrans('', '', chars))
@@ -161,17 +158,9 @@ def get_video_details(video_url):
     except Exception as e:
         print(f"Ocorreu um erro ao buscar os detalhes do vídeo: {e}")
    
-@app.route('/api/post-endpoint', methods=['POST'])
-def post_data():
-    content = request.json
-    video_url = content
-    if not video_url:
-        return jsonify({'error': 'URL do vídeo não fornecida.'}), 400
-    
-    return jsonify(video_details)
+ 
  
  
 # Exemplo de uso com uma URL do YouTube
-
-if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+video_url = 'https://www.youtube.com/watch?v=IIY4pFLsKa8'
+get_video_details(video_url)

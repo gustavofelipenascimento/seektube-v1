@@ -4,6 +4,7 @@ import { View, Text } from "react-native";
 import styles from "../config/styles";
 import { Image } from "expo-image";
 import { useTheme } from "../contexts/ThemeContexts";
+import axios from 'axios';
 
 export default function SeekScreen({ navigation }) {
   const [youtubeLink, setYoutubeLink] = useState(""); // Armazena o link do usuário
@@ -22,7 +23,16 @@ export default function SeekScreen({ navigation }) {
       // Se o link for válido, navega para a tela "ApiTest" com o link
       setError(""); // Limpa qualquer erro anterior
       navigation.navigate("ApiTest", { url: youtubeLink });
+      axios.post('http://172.20.132.112:5000/api/post-endpoint', { input: inputValue })
+      .then(response => {
+        // Navega para a segunda página com a resposta da API
+        navigation.navigate('ApiTest', { apiResponse: response.data });
+      })
+      .catch(error => {
+        console.error("Erro ao enviar dados:", error);
+      });
       setYoutubeLink(""); // Limpa o campo de texto após a navegação
+          // Envia dados para a API
     } else {
       // Se o link for inválido, exibe mensagem de erro
       setError("Insira um link do YouTube corretamente.");
@@ -34,6 +44,7 @@ export default function SeekScreen({ navigation }) {
     setYoutubeLink(""); // Limpa o campo de texto
     setError(""); // Limpa a mensagem de erro
   };
+
 
   const imageSource = isDarkTheme
     ? require("../img/seek-light.png")
