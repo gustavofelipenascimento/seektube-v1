@@ -19,9 +19,11 @@
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/native-stack": "^6.9.26",
     "add": "^2.0.6",
+    "axios": "^1.7.7",
     "bcryptjs": "^2.4.3",
     "bcryptjs-react": "^2.4.6",
     "expo": "^51.0.32",
+    "expo-file-system": "~17.0.1",
     "expo-image": "~1.12.15",
     "expo-image-picker": "~15.0.7",
     "expo-location": "~17.0.1",
@@ -38,8 +40,7 @@
     "react-native-screens": "3.31.1",
     "react-native-vector-icons": "^10.1.0",
     "react-native-web": "~0.19.10",
-    "yarn": "^1.22.22",
-    "expo-file-system": "~17.0.1"
+    "yarn": "^1.22.22"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
