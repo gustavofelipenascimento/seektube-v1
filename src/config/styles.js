@@ -360,7 +360,31 @@ const styles = StyleSheet.create({
     borderRadius: 60,
     marginBottom: 20,
   },
+  editContainer: {
+    marginVertical: 20,
+    paddingHorizontal: 20,
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+  },
 
+  inputpfp: {
+    width: "100%",
+    padding: 10,
+    marginVertical: 10,
+    backgroundColor: "#f1f1f1", // ajustável para o modo claro e escuro
+    borderRadius: 8,
+  },
+  infoContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginVertical: 8,
+  },
+  editButton: {
+    padding: 0, // Remove qualquer padding extra
+    margin: 0,
+  },
 
 });
 

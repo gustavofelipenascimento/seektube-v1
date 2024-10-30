@@ -45,6 +45,7 @@ import {
 } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import styles from "../config/styles";
+import AlterarNomeScreen from "../screens/AlterarNomeScreen";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -70,7 +71,7 @@ function DrawerNavigator({ navigation }) {
       const userSnap = await getDoc(userDoc); // Obtem os dados do Firestore
       if (userSnap.exists()) {
         const userData = userSnap.data();
-        setProfileImageUrl(userData.profileImageUrl); // Pega a URL da imagem de perfil
+        setProfileImageUrl(userData.avatar); // Pega a URL da imagem de perfil
         setUserName(userData.name); // Pega o nome do usuário
       }
     }
@@ -81,6 +82,7 @@ function DrawerNavigator({ navigation }) {
     fetchProfileData();
   }, []);
 
+  const [mostrarTelas, setMostrarTelas] = useState(false);
   const openMenu = () => setVisible(true);
   const closeMenu = () => setVisible(false);
 
@@ -156,10 +158,12 @@ function DrawerNavigator({ navigation }) {
       <Drawer.Screen name="Seek" component={SeekScreen} />
       <Drawer.Screen name="News" component={SkNewsScreen} />
       <Drawer.Screen name="Study" component={SkStudyScreen} />
-      <Drawer.Screen name="Altere sua Senha" component={ConfirmaSenSeek} />
       <Drawer.Screen name="Sobre" component={SobreScreen} />
       <Drawer.Screen name="ApiTest" component={ApiScreenTest} />
-      <Drawer.Screen options={{}} name="Profile" component={ProfileScreen} />
+
+      <Drawer.Screen name="Profile" component={ProfileScreen} />
+      <Drawer.Screen name="Altere sua Senha" component={ConfirmaSenSeek} />
+      <Drawer.Screen name="AlterarNomeScreen" component={AlterarNomeScreen} />
     </Drawer.Navigator>
   );
 }
@@ -191,7 +195,7 @@ function CustomDrawerContent(props) {
           email: userData.email || "Email não disponível",
           estado: userData.estado || "Estado não disponível",
           dtnasc: userData.dtnasc || "Data de nascimento não disponível",
-          avatar: userData.profileImageUrl || "", // URL do avatar
+          avatar: userData.avatar || "", // URL do avatar
         });
       }
     }
@@ -307,6 +311,7 @@ export default function AppNavigator() {
                   headerTitle: "",
                 }}
               />
+
               <Stack.Screen
                 name="Terms"
                 component={TermosScreen}
