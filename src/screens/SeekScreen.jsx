@@ -4,7 +4,6 @@ import { View, Text } from "react-native";
 import styles from "../config/styles";
 import { Image } from "expo-image";
 import { useTheme } from "../contexts/ThemeContexts";
-import axios from 'axios';
 
 export default function SeekScreen({ navigation }) {
   const [youtubeLink, setYoutubeLink] = useState(""); // Armazena o link do usuário
