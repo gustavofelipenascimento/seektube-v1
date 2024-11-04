@@ -44,6 +44,9 @@ import ProfileScreen from "../screens/ProfileScreen";
 import TermosScreen from "../screens/PrivacidadeScreen";
 import PrivacidadeScreen from "../screens/TermosScreen";
 import AlterarNomeScreen from "../screens/AlterarNomeScreen";
+import AlterarEstadoScreen from "../screens/AlterarEstadoScreen";
+import AlterarDataNascimentoScreen from "../screens/AlterarDtNascimentoScreen";
+import AlterarEmailScreen from "../screens/AlterarEmailScreen";
 
 // Configurações de navegação
 const Stack = createNativeStackNavigator();
@@ -235,6 +238,33 @@ export default function AppNavigator() {
               <Stack.Screen
                 name="AlterarNomeScreen"
                 component={AlterarNomeScreen}
+                options={{
+                  headerShown: true,
+                  headerTransparent: true,
+                  headerTitle: "",
+                }}
+              />
+              <Stack.Screen
+                name="AlterarEmailScreen"
+                component={AlterarEmailScreen}
+                options={{
+                  headerShown: true,
+                  headerTransparent: true,
+                  headerTitle: "",
+                }}
+              />
+              <Stack.Screen
+                name="AlterarEstadoScreen"
+                component={AlterarEstadoScreen}
+                options={{
+                  headerShown: true,
+                  headerTransparent: true,
+                  headerTitle: "",
+                }}
+              />
+              <Stack.Screen
+                name="AlterarDtNascimentoScreen"
+                component={AlterarDataNascimentoScreen}
                 options={{
                   headerShown: true,
                   headerTransparent: true,

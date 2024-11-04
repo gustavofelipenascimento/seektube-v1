@@ -47,7 +47,10 @@ export default function ProfileScreen({ navigation }) {
             nome: userData.nome || "Nome não disponível",
             email: userData.email || "Email não disponível",
             estado: userData.estado || "Estado não disponível",
-            dtnasc: userData.dtnasc || "Data de nascimento não disponível",
+            dtnasc: userData.dtnasc
+              ? new Date(userData.dtnasc.seconds * 1000).toLocaleDateString()
+              : "Data de nascimento não disponível",
+
             avatar: userData.avatar || "",
           });
         } else {
@@ -177,7 +180,7 @@ export default function ProfileScreen({ navigation }) {
         </Text>
         <Button
           mode="text"
-          onPress={() => navigation.navigate("EditEmailScreen")}
+          onPress={() => navigation.navigate("AlterarEmailScreen")}
           style={[styles.editButton]}
         >
           Alterar Email
@@ -200,7 +203,7 @@ export default function ProfileScreen({ navigation }) {
         </Text>
         <Button
           mode="text"
-          onPress={() => navigation.navigate("EditEstadoScreen")}
+          onPress={() => navigation.navigate("AlterarEstadoScreen")}
           style={[styles.editButton]}
         >
           Alterar Estado
@@ -223,7 +226,7 @@ export default function ProfileScreen({ navigation }) {
         </Text>
         <Button
           mode="text"
-          onPress={() => navigation.navigate("EditDateScreen")}
+          onPress={() => navigation.navigate("AlterarDtNascimentoScreen")}
           style={[styles.editButton]}
         >
           Alterar Data
