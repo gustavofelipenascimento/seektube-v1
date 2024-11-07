@@ -141,20 +141,20 @@ export default function ProfileScreen({ navigation }) {
       <Title style={[styles.title]}>Perfil</Title>
 
       {/* Informações com botões à direita, responsivas */}
+
+    
+
       <View
         style={[
-          styles.infoContainer,
-          {
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            paddingHorizontal: width * 0.05,
-          },
-        ]}
+          styles.infoContainer]}
       >
-        <Text style={[styles.profileInfo, { flex: 1 }]}>
+        <Text style={[styles.profileInfo,]}>
           Nome: {userData.nome}
         </Text>
+        </View>
+        
+      
+        <View style={[styles.editContainer]}> 
         <Button
           mode="text"
           onPress={() => navigation.navigate("AlterarNomeScreen")}
@@ -162,22 +162,19 @@ export default function ProfileScreen({ navigation }) {
         >
           Alterar Nome
         </Button>
-      </View>
-
+        </View>
+       
       <View
         style={[
-          styles.infoContainer,
-          {
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            paddingHorizontal: width * 0.05,
-          },
+          styles.infoContainer
         ]}
       >
-        <Text style={[styles.profileInfo, { flex: 1 }]}>
+        <Text style={[styles.profileInfo,]}>
           Email: {userData.email}
         </Text>
+        </View>
+
+        <View style={[styles.editContainer]}> 
         <Button
           mode="text"
           onPress={() => navigation.navigate("AlterarEmailScreen")}
@@ -185,22 +182,20 @@ export default function ProfileScreen({ navigation }) {
         >
           Alterar Email
         </Button>
-      </View>
+        </View>
 
       <View
         style={[
           styles.infoContainer,
-          {
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            paddingHorizontal: width * 0.05,
-          },
+    
         ]}
       >
-        <Text style={[styles.profileInfo, { flex: 1 }]}>
+        <Text style={[styles.profileInfo,]}>
           Estado: {userData.estado}
         </Text>
+        </View>
+
+        <View style={[styles.editContainer]}> 
         <Button
           mode="text"
           onPress={() => navigation.navigate("AlterarEstadoScreen")}
@@ -208,22 +203,19 @@ export default function ProfileScreen({ navigation }) {
         >
           Alterar Estado
         </Button>
-      </View>
+        </View>
+      
 
       <View
         style={[
-          styles.infoContainer,
-          {
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            paddingHorizontal: width * 0.05,
-          },
-        ]}
+          styles.infoContainer]}
       >
-        <Text style={[styles.profileInfo, { flex: 1 }]}>
+        <Text style={[styles.profileInfo,]}>
           Data de Nascimento: {userData.dtnasc}
         </Text>
+        </View>
+
+        <View style={[styles.editContainer]}> 
         <Button
           mode="text"
           onPress={() => navigation.navigate("AlterarDtNascimentoScreen")}
@@ -231,20 +223,18 @@ export default function ProfileScreen({ navigation }) {
         >
           Alterar Data
         </Button>
-      </View>
+        </View>
+      
 
       <View
         style={[
-          styles.infoContainer,
-          {
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            paddingHorizontal: width * 0.05,
-          },
+          styles.infoContainer
         ]}
       >
-        <Text style={[styles.profileInfo, { flex: 1 }]}>Senha</Text>
+        <Text style={[styles.profileInfo]}>Senha</Text>
+        </View>
+
+        <View style={[styles.editContainer]}> 
         <Button
           mode="text"
           onPress={() => navigation.navigate("Altere sua Senha")}
@@ -252,7 +242,10 @@ export default function ProfileScreen({ navigation }) {
         >
           Alterar Senha
         </Button>
-      </View>
+        </View>
+       
+
+
 
       <Button
         mode="contained"

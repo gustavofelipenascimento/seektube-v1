@@ -316,11 +316,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
-  editButton: {
-    marginTop: 20,
-  },
+  
   logoutButton: {
     marginTop: 10,
+    
   },
   modalContainer: {
     flex: 1,
@@ -360,13 +359,7 @@ const styles = StyleSheet.create({
     borderRadius: 60,
     marginBottom: 20,
   },
-  editContainer: {
-    marginVertical: 20,
-    paddingHorizontal: 20,
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "center",
-  },
+  
 
   inputpfp: {
     width: "100%",
@@ -375,16 +368,38 @@ const styles = StyleSheet.create({
     backgroundColor: "#f1f1f1", // ajustável para o modo claro e escuro
     borderRadius: 8,
   },
+
+
+  editContainer: {
+    paddingBottom: 30,
+    
+  },
+
   infoContainer: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
-    marginVertical: 8,
+    justifyContent:"space-between",
+
+   
   },
-  editButton: {
-    padding: 0, // Remove qualquer padding extra
-    margin: 0,
+
+  
+  profileInfo: {
+    flex: 1,
+    fontWeight: "bold",
+    // marginLeft: 5,
+    // right: "20%",
+    // textAlign: "left"
+    
+
   },
+
+  //  editButton: {
+  //  textAlign: "right",
+  //  left: "20%"
+  //  },
+
+
 
 });
 
