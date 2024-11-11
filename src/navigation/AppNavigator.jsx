@@ -109,6 +109,7 @@ function DrawerNavigator() {
       <Drawer.Screen name="Study" component={SkStudyScreen} />
       <Drawer.Screen name="Sobre" component={SobreScreen} />
       <Drawer.Screen name="ApiTest" component={ApiScreenTest} />
+      <Drawer.Screen name="FeedBack" component={FeedbackScreen} />
     </Drawer.Navigator>
   );
 }

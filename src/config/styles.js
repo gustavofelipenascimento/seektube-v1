@@ -13,11 +13,11 @@ const styles = StyleSheet.create({
 
   parag: {
     paddingBottom: 10,
-    paddingTop: 10, 
-    textAlign: "justify"
+    paddingTop: 10,
+    textAlign: "justify",
   },
   sub: {
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   titleUso: {
     fontSize: 24,
@@ -316,23 +316,22 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
-  
+
   logoutButton: {
     marginTop: 10,
-    
   },
   modalContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   modalContent: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     padding: 20,
     borderRadius: 10,
-    width: '80%',
-    alignItems: 'center',
+    width: "80%",
+    alignItems: "center",
   },
   imagePreview: {
     width: 100,
@@ -359,7 +358,6 @@ const styles = StyleSheet.create({
     borderRadius: 60,
     marginBottom: 20,
   },
-  
 
   inputpfp: {
     width: "100%",
@@ -369,38 +367,47 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
 
-
   editContainer: {
     paddingBottom: 30,
-    
   },
 
   infoContainer: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent:"space-between",
-
-   
+    justifyContent: "space-between",
   },
 
-  
   profileInfo: {
     flex: 1,
     fontWeight: "bold",
-    // marginLeft: 5,
-    // right: "20%",
-    // textAlign: "left"
-    
-
   },
 
-  //  editButton: {
-  //  textAlign: "right",
-  //  left: "20%"
-  //  },
+  textArea: {
+    height: 120,
+    marginBottom: 20,
+    backgroundColor: "#f6f6f6",
+  },
 
+  success: {
+    color: "green",
+    textAlign: "center",
+    marginTop: 10,
+  },
 
+  submitButton: {
+    backgroundColor: "#6200ee",
+    paddingVertical: 10,
+    marginVertical: 15,
+  },
 
+  snackbar: {
+    backgroundColor: "#4caf50",
+  },
+
+  backButton: {
+    alignSelf: "flex-start",
+    marginBottom: 10,
+  },
 });
 
 export default styles;
