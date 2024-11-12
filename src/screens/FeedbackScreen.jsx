@@ -4,6 +4,9 @@ import { Surface, TextInput, Button, Text, IconButton, Snackbar } from "react-na
 import { getAuth } from "firebase/auth";
 import { getFirestore, collection, addDoc, Timestamp } from "firebase/firestore";
 import styles from "../config/styles";
+import { Image } from "expo-image";
+import { useTheme } from "../contexts/ThemeContexts";
+
 
 export default function FeedbackScreen({ navigation }) {
   const [feedback, setFeedback] = useState("");
@@ -44,40 +47,52 @@ export default function FeedbackScreen({ navigation }) {
     }
   };
 
+  const { isDarkTheme} = useTheme();
+
+  const imageSource = isDarkTheme
+    ? require("../img/seek-light.png")
+    : require("../img/seektube.png");
+
   return (
     <Surface style={styles.container}>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.innerContainer}
       >
-        <IconButton
-          icon="arrow-left"
-          size={24}
-          onPress={() => navigation.goBack()}
-          style={styles.backButton}
+
+      
+        <Image style={styles.image} source={imageSource} />
+
+        <Text style={styles.title}>Você que manda!</Text>
+        <Text style={styles.feedSpan}>Caso queira reportar um erro em nosso site, entre em contato e fale diretamente conosco!</Text>
+
+        <TextInput
+          placeholder="Email"
+          value={feedback}
+          onChangeText={setFeedback}
+          style={styles.input}
+          underlineColor="transparent"
+          activeUnderlineColor="transparent"
         />
 
-        <Text style={styles.title}>Enviar Feedback</Text>
 
         <TextInput
           label="Seu Feedback"
-          placeholder="Escreva aqui seu feedback"
+          placeholder="Sua mensagem aqui"
           value={feedback}
           onChangeText={setFeedback}
-          multiline
+          underlineColor="transparent"
+          activeUnderlineColor="transparent"
           style={styles.textArea}
-          mode="outlined"
-          activeOutlineColor="#6200ee"
-          theme={{ colors: { placeholder: "#000", text: "#000" } }}
         />
 
         <Button
-          mode="contained"
+          style={styles.button}
           onPress={handleSubmitFeedback}
           loading={isSubmitting}
           disabled={isSubmitting}
-          style={styles.submitButton}
           icon="send"
+          mode="contained"
         >
           Enviar
         </Button>

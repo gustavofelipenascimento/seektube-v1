@@ -384,9 +384,24 @@ const styles = StyleSheet.create({
 
   textArea: {
     height: 120,
-    marginBottom: 20,
-    backgroundColor: "#f6f6f6",
+    borderColor: "#757aff",
+    borderWidth: 1,
+    marginBottom: 15,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    borderRadius: 20,
+    padding: 10,
+    backgroundColor: "transparent",
   },
+
+  feedSpan: {
+    fontSize: 16,
+    textAlign: "center",
+    bottom: 15,
+
+  },
+
+
 
   success: {
     color: "green",
