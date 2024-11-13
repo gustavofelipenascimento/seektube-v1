@@ -6,8 +6,20 @@ import { Image } from "expo-image";
 
 export default function ApiScreenTest({ route, navigation }) {
   // Extraindo o link passado pela SeekScreen
-  const { url } = route.params;
-  const { apiResponse } = route.params;
+  //const { url } = route.params;
+
+  const ReceberDados = () => {
+    const [dados, setDados] = useState({});
+  
+    useEffect(() => {
+      fetch('http://http://127.0.0.1:5000/process')
+        .then(response => response.json())
+        .then(data => setDados(data))
+        .catch(error => console.error(error));
+    }, []);
+  
+    return dados.resultado
+  };
 
   return (
     <Surface style={styles.container}>
@@ -20,7 +32,7 @@ export default function ApiScreenTest({ route, navigation }) {
         {/* Colocando o link recebido no TextInput */}
         <TextInput
           placeholder="Insira um link..."
-          value={url} // Define o valor do input como o link recebido
+          value="link"//{url} // Define o valor do input como o link recebido
           style={styles.input}
           underlineColor="transparent"
           activeUnderlineColor="transparent"
@@ -28,7 +40,7 @@ export default function ApiScreenTest({ route, navigation }) {
 
         <TextInput
           placeholder="links"
-          value={JSON.stringify(apiResponse)} // Define o valor do input como o link recebido
+          value={JSON.stringify(ReceberDados)} // Define o valor do input como o link recebido
           style={styles.input}
           underlineColor="transparent"
           activeUnderlineColor="transparent"
@@ -36,7 +48,7 @@ export default function ApiScreenTest({ route, navigation }) {
 
         <View style={styles.conjunto}>
           <Button
-            onPress={() => navigation.navigate("SeekScreen")} // Pode navegar de volta se necessário
+            onPress={() => navigation.navigate("Seek")} // Pode navegar de volta se necessário
             mode="contained-tonal"
             style={styles.seek}
           >

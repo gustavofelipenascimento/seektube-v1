@@ -1,16 +1,25 @@
 from googleapiclient.discovery import build
 import re
-from datetime import datetime
 from youtube_transcript_api import YouTubeTranscriptApi, TranscriptsDisabled, NoTranscriptFound
 import ollama
 import requests
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app, resources={r"/process*": {"origins": "http://127.0.0.1:5000"}}, supports_credentials=True)
 
+@app.route('/process', methods=['POST'])
+def process_data():
+    data = request.json['data']
+    get_video_details(data)
+
+    if not data:
+        return jsonify({'error': 'URL do vídeo não fornecida.'}), 400
+    
 # Defina sua chave de API aqui
 API_KEY = 'AIzaSyDxiS8ubA_OQqGb5FUd2r1Ebsyi_5vsK3c'
- 
+
 # Cria um serviço de conexão com a API YouTube
 youtube = build('youtube', 'v3', developerKey=API_KEY)
  
@@ -32,10 +41,10 @@ def get_transcript(video_id):
         return "0"  # Se não houver transcrição disponível
  
 # Função para obter os detalhes do vídeo
-def get_video_details(video_url):
+def get_video_details(data):
     try:
         # Extrair ID do vídeo a partir da URL
-        video_id = extract_video_id(video_url)
+        video_id = extract_video_id(data)
        
         # Fazer a requisição à API para obter detalhes do vídeo
         request = youtube.videos().list(
@@ -44,17 +53,11 @@ def get_video_details(video_url):
         )
         response = request.execute()
  
-        # Obter o momento atual da requisição
-        request_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
- 
         # Extrair informações do vídeo
         for video in response.get('items', []):
             video_id = video.get('id', '0')
             snippet = video.get('snippet', {})
-            title = snippet.get('title', '0')
             tags = snippet.get('tags', '0')
-            captions = video['contentDetails'].get('caption', '0')  # "true" ou "false"
-            thumbnail_url = snippet.get('thumbnails', {}).get('high', {}).get('url', '0')
             category_id = snippet.get('categoryId', '0')
  
             # Obter a transcrição (se houver)
@@ -112,10 +115,11 @@ def get_video_details(video_url):
                     response = ollama.chat(
                         model='llama3.2',
                         messages=[
-                            {"role": "user", "content": "Resuma o texto abaixo em apenas 10 palavras-chave relevantes."},
-                            {"role": "user", "content": f"{text}"}
+                            {"role": "user", "content": "Você é um transformador de textos em palavras chave, e deve apenas responder o que eu lhe pedir sem tagalerar e sem acrescentar nada"},
+                            {"role": "user", "content": "Compare os textos e tags abaixo e os resuma em apenas 10 palavras chave."},
+                            {"role": "user", "content": f"{text} e as {tags}"}
                             #   {f"conteudo: ","legenda", "tags" }
-   
+    
                         ],
                     )
  
@@ -128,17 +132,6 @@ def get_video_details(video_url):
  
             text = transcript
             summary = summarize_text(text)
-           
- 
-            # Exibir os dados
-            print(f'ID do vídeo: {video_id}')
-            print(f'Título: {title}')
-            print(f'Tags: {tags}')
-            print(f'Legendas disponíveis: {captions}')
-            print(f'Thumbnail: {thumbnail_url}')
-            print(f'Momento da requisição: {request_time}')
-            print(f'Categoria: {categoria}')
-            print(f'Transcrição: {summary}')
  
             baseUrl='https://customsearch.googleapis.com/customsearch/v1'
             apikey= 'AIzaSyBuR1js8SgQvg4C5MSDMox9zfXVcunY4x0'
@@ -151,9 +144,9 @@ def get_video_details(video_url):
             url = f'{baseUrl}?key={apikey}&cx={cx}&q={query}'
             response = requests.get(url)
             jason = response.json()
-            print(url)
-            for i in jason['items']:
-                print(i['link'])
+            links = [i['link'] for i in jason['items']]
+
+            resultado = ' '.join(links)
    
  
     except ValueError as e:
@@ -161,14 +154,9 @@ def get_video_details(video_url):
     except Exception as e:
         print(f"Ocorreu um erro ao buscar os detalhes do vídeo: {e}")
    
-@app.route('/api/post-endpoint', methods=['POST'])
-def post_data():
-    content = request.json
-    video_url = content
-    if not video_url:
-        return jsonify({'error': 'URL do vídeo não fornecida.'}), 400
+
     
-    return jsonify(video_details)
+    return jsonify({resultado})
  
  
 # Exemplo de uso com uma URL do YouTube
