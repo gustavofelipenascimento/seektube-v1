@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { TouchableOpacity, Alert } from "react-native";
+import { TouchableOpacity, Alert, View, Dimensions } from "react-native";
 import {
   Surface,
   Avatar,
@@ -17,6 +17,8 @@ import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import styles from "../config/styles";
 
+const { width } = Dimensions.get("window");
+
 export default function ProfileScreen({ navigation }) {
   const [userData, setUserData] = useState({
     nome: "",
@@ -25,7 +27,6 @@ export default function ProfileScreen({ navigation }) {
     dtnasc: "",
     avatar: "",
   });
-
   const [isUploading, setIsUploading] = useState(false);
   const [isDialogVisible, setIsDialogVisible] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -46,8 +47,11 @@ export default function ProfileScreen({ navigation }) {
             nome: userData.nome || "Nome não disponível",
             email: userData.email || "Email não disponível",
             estado: userData.estado || "Estado não disponível",
-            dtnasc: userData.dtnasc || "Data de nascimento não disponível",
-            avatar: userData.avatar || "", // Agora usamos a URL da imagem no Firebase Storage
+            dtnasc: userData.dtnasc
+              ? new Date(userData.dtnasc.seconds * 1000).toLocaleDateString()
+              : "Data de nascimento não disponível",
+
+            avatar: userData.avatar || "",
           });
         } else {
           Alert.alert("Erro", "Usuário não encontrado.");
@@ -58,7 +62,6 @@ export default function ProfileScreen({ navigation }) {
     fetchUserData();
   }, [auth.currentUser]);
 
-  // Solicitar permissões de acesso à galeria
   const requestPermissions = async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (status !== "granted") {
@@ -73,7 +76,6 @@ export default function ProfileScreen({ navigation }) {
     requestPermissions();
   }, []);
 
-  // Selecionar imagem da galeria
   const handleImagePick = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -89,7 +91,6 @@ export default function ProfileScreen({ navigation }) {
     }
   };
 
-  // Upload da imagem para o Firebase Storage
   const handleUploadImage = async () => {
     if (selectedImage) {
       setIsUploading(true);
@@ -97,24 +98,15 @@ export default function ProfileScreen({ navigation }) {
       const storage = getStorage();
 
       try {
-        // Ler o arquivo como blob
         const response = await fetch(selectedImage);
         const blob = await response.blob();
-
-        // Criar uma referência no Firebase Storage
         const storageRef = ref(storage, `profileImages/${user.uid}.jpg`);
-
-        // Fazer o upload
         await uploadBytes(storageRef, blob);
-
-        // Obter a URL de download
         const downloadURL = await getDownloadURL(storageRef);
 
-        // Atualizar o Firestore com a URL da imagem
         const userDocRef = doc(db, "usuarios", user.uid);
         await updateDoc(userDocRef, { avatar: downloadURL });
 
-        // Atualizar estado para refletir a nova imagem no frontend
         setUserData((prevData) => ({
           ...prevData,
           avatar: downloadURL,
@@ -124,7 +116,7 @@ export default function ProfileScreen({ navigation }) {
         setIsDialogVisible(false);
         setSelectedImage(null);
       } catch (error) {
-        Alert.alert("Erro", "Não foi possível alterar a imagem de perfil.");
+        Alert.alert("Erro", "Não foi possível alterar a imagem do perfil.");
         console.error("Erro ao fazer upload da imagem:", error);
       } finally {
         setIsUploading(false);
@@ -133,8 +125,7 @@ export default function ProfileScreen({ navigation }) {
   };
 
   return (
-    <Surface style={styles.container}>
-      {/* Avatar do perfil com opção de alterar imagem */}
+    <Surface style={[styles.container]}>
       <TouchableOpacity onPress={handleImagePick}>
         {userData.avatar ? (
           <Avatar.Image
@@ -147,16 +138,117 @@ export default function ProfileScreen({ navigation }) {
         )}
       </TouchableOpacity>
 
-      <Title style={styles.title}>Perfil</Title>
-      <Text style={styles.profileInfo}>Nome: {userData.nome}</Text>
-      <Text style={styles.profileInfo}>Email: {userData.email}</Text>
-      <Text style={styles.profileInfo}>Estado: {userData.estado}</Text>
-      <Text style={styles.profileInfo}>
-        Data de Nascimento: {userData.dtnasc}
-      </Text>
+      <Title style={[styles.title]}>Perfil</Title>
+
+      {/* Informações com botões à direita, responsivas */}
+
+    
+
+      <View
+        style={[
+          styles.infoContainer]}
+      >
+        <Text style={[styles.profileInfo,]}>
+          Nome: {userData.nome}
+        </Text>
+        </View>
+        
+      
+        <View style={[styles.editContainer]}> 
+        <Button
+          mode="text"
+          onPress={() => navigation.navigate("AlterarNomeScreen")}
+          style={[styles.editButton]}
+        >
+          Alterar Nome
+        </Button>
+        </View>
+       
+      <View
+        style={[
+          styles.infoContainer
+        ]}
+      >
+        <Text style={[styles.profileInfo,]}>
+          Email: {userData.email}
+        </Text>
+        </View>
+
+        <View style={[styles.editContainer]}> 
+        <Button
+          mode="text"
+          onPress={() => navigation.navigate("AlterarEmailScreen")}
+          style={[styles.editButton]}
+        >
+          Alterar Email
+        </Button>
+        </View>
+
+      <View
+        style={[
+          styles.infoContainer,
+    
+        ]}
+      >
+        <Text style={[styles.profileInfo,]}>
+          Estado: {userData.estado}
+        </Text>
+        </View>
+
+        <View style={[styles.editContainer]}> 
+        <Button
+          mode="text"
+          onPress={() => navigation.navigate("AlterarEstadoScreen")}
+          style={[styles.editButton]}
+        >
+          Alterar Estado
+        </Button>
+        </View>
+      
+
+      <View
+        style={[
+          styles.infoContainer]}
+      >
+        <Text style={[styles.profileInfo,]}>
+          Data de Nascimento: {userData.dtnasc}
+        </Text>
+        </View>
+
+        <View style={[styles.editContainer]}> 
+        <Button
+          mode="text"
+          onPress={() => navigation.navigate("AlterarDtNascimentoScreen")}
+          style={[styles.editButton]}
+        >
+          Alterar Data
+        </Button>
+        </View>
+      
+
+      <View
+        style={[
+          styles.infoContainer
+        ]}
+      >
+        <Text style={[styles.profileInfo]}>Senha</Text>
+        </View>
+
+        <View style={[styles.editContainer]}> 
+        <Button
+          mode="text"
+          onPress={() => navigation.navigate("Altere sua Senha")}
+          style={[styles.editButton]}
+        >
+          Alterar Senha
+        </Button>
+        </View>
+       
+
+
 
       <Button
-        mode="outlined"
+        mode="contained"
         onPress={() => {
           auth.signOut();
           navigation.navigate("SignIn");
@@ -166,7 +258,6 @@ export default function ProfileScreen({ navigation }) {
         Logout
       </Button>
 
-      {/* Popup de confirmação do upload */}
       <Portal>
         <Dialog
           visible={isDialogVisible}

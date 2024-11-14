@@ -6,29 +6,28 @@ import { Image } from "expo-image";
 import { useTheme } from "../contexts/ThemeContexts";
 import axios from "axios";
 
-
 export default function SeekScreen({ navigation }) {
   const [youtubeLink, setYoutubeLink] = useState(""); // Armazena o link do usuário
   const [error, setError] = useState(""); // Armazena erros de validação
   const { isDarkTheme} = useTheme();
 
   // Função para validar se o link é do YouTube
- /* const validateYouTubeUrl = (url) => {
+    const validateYouTubeUrl = (youtubeLink) => {
     const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/;
-    return youtubeRegex.test(url);
-  };*/
+    return youtubeRegex.test(youtubeLink);
+  };
 
   const handleSeek = async () => {
-    //if (validateYouTubeUrl(youtubeLink)){
+    if (validateYouTubeUrl(youtubeLink)){
     try {
-        const response = await axios.post('http://127.0.0.1:5000/process', { data: youtubeLink });
+        const response = await axios.post('http://127.0.0.1:8081/process', { data: youtubeLink });
         navigation.navigate('ApiTest', { result: response.data });
     } catch (error) {
         console.error(error);
     }
-  /*} else {
+    } else {
     console.error("Erro com o link do youtube", error);
-  }*/
+  }
   };
   // Função para limpar o campo de texto e os erros
   const handleClear = () => {

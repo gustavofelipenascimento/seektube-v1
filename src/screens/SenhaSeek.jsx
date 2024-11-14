@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { View, ScrollView } from "react-native";
+import { View } from "react-native";
 import { auth } from "../config/firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { sendPasswordResetEmail } from "firebase/auth";
 import styles from "../config/styles";
 import { Surface, TextInput, Button, Text } from "react-native-paper";
 import { Image } from "expo-image";
@@ -9,21 +9,20 @@ import { useTheme } from "../contexts/ThemeContexts";
 
 export default function SenhaSeek({ navigation }) {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
   const { isDarkTheme } = useTheme();
 
   const imageSource = isDarkTheme
     ? require("../img/seek-light.png")
     : require("../img/seektube.png");
 
-  const handleLogin = () => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        navigation.navigate("News");
+  const handlePasswordReset = () => {
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        setMessage("Um e-mail de redefinição de senha foi enviado.");
       })
       .catch((error) => {
-        setError(error.message);
+        setMessage("Erro ao enviar e-mail de redefinição. Verifique o e-mail inserido.");
       });
   };
 
@@ -32,7 +31,7 @@ export default function SenhaSeek({ navigation }) {
       <View style={styles.innerContainer}>
         <Image style={styles.image} source={imageSource} />
 
-        <Text style={styles.title}>Altere Sua Senha</Text>
+        <Text style={styles.title}>Redefinir Sua Senha</Text>
 
         <Text style={styles.inputxt}>Digite seu Email:</Text>
         <TextInput
@@ -44,13 +43,11 @@ export default function SenhaSeek({ navigation }) {
           activeUnderlineColor="transparent"
         />
 
-        <Button mode="contained" style={styles.button}>
+        <Button mode="contained" onPress={handlePasswordReset} style={styles.button}>
           Enviar
         </Button>
-        <Text style={styles.error}>{error}</Text>
-        <Button onPress={() => navigation.navigate("ConfirmaSenSeek")}>
-          Um e-mail será enviado para a sua conta.
-        </Button>
+
+        {message ? <Text style={styles.message}>{message}</Text> : null}
       </View>
     </Surface>
   );

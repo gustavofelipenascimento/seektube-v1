@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Surface, TextInput } from "react-native-paper";
 import styles from "../config/styles";
 import { View } from "react-native";
@@ -6,21 +6,21 @@ import { Image } from "expo-image";
 
 export default function ApiScreenTest({ route, navigation }) {
   // Extraindo o link passado pela SeekScreen
-  //const { url } = route.params;
+  const { youtubeLink } = route.params;
 
-  const ReceberDados = () => {
-    const [dados, setDados] = useState({});
+  //const ReceberDados = () => {
+    const [dados, setDados] = useState([]);
   
     useEffect(() => {
-      fetch('http://http://127.0.0.1:5000/process')
+      fetch('http://127.0.0.1:8081/process')
         .then(response => response.json())
         .then(data => setDados(data))
         .catch(error => console.error(error));
     }, []);
   
-    return dados.resultado
-  };
-
+    //return dados.resultado
+  //};
+  //ReceberDados();
   return (
     <Surface style={styles.container}>
       <View style={styles.innerContainer}>
@@ -32,7 +32,7 @@ export default function ApiScreenTest({ route, navigation }) {
         {/* Colocando o link recebido no TextInput */}
         <TextInput
           placeholder="Insira um link..."
-          value="link"//{url} // Define o valor do input como o link recebido
+          value={youtubeLink} // Define o valor do input como o link recebido
           style={styles.input}
           underlineColor="transparent"
           activeUnderlineColor="transparent"
@@ -40,7 +40,7 @@ export default function ApiScreenTest({ route, navigation }) {
 
         <TextInput
           placeholder="links"
-          value={JSON.stringify(ReceberDados)} // Define o valor do input como o link recebido
+          value={JSON.stringify(dados)} // Define o valor do input como o link recebido
           style={styles.input}
           underlineColor="transparent"
           activeUnderlineColor="transparent"

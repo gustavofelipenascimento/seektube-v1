@@ -5,20 +5,31 @@ import ollama
 import requests
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
-CORS(app, resources={r"/process*": {"origins": "http://127.0.0.1:5000"}}, supports_credentials=True)
+CORS(app, resources={r"/process": {"origins": "*"}})
 
-@app.route('/process', methods=['POST'])
+@app.route('/process', methods=['POST', 'GET'])
 def process_data():
     data = request.json['data']
-    get_video_details(data)
 
     if not data:
-        return jsonify({'error': 'URL do vídeo não fornecida.'}), 400
+        response = jsonify({'error': 'URL do vídeo não fornecida.'})
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response, 400
     
+    resultado = get_video_details(data)
+    response = jsonify(resultado)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 # Defina sua chave de API aqui
-API_KEY = 'AIzaSyDxiS8ubA_OQqGb5FUd2r1Ebsyi_5vsK3c'
+API_KEY = os.getenv('YOUTUBE_API_KEY')
+
+
 
 # Cria um serviço de conexão com a API YouTube
 youtube = build('youtube', 'v3', developerKey=API_KEY)
@@ -42,6 +53,7 @@ def get_transcript(video_id):
  
 # Função para obter os detalhes do vídeo
 def get_video_details(data):
+    response = ""
     try:
         # Extrair ID do vídeo a partir da URL
         video_id = extract_video_id(data)
@@ -134,8 +146,10 @@ def get_video_details(data):
             summary = summarize_text(text)
  
             baseUrl='https://customsearch.googleapis.com/customsearch/v1'
-            apikey= 'AIzaSyBuR1js8SgQvg4C5MSDMox9zfXVcunY4x0'
+            apikey = 'AIzaSyBuR1js8SgQvg4C5MSDMox9zfXVcunY4x0'
+            #apikey = os.getenv('API_KEY')
             cx = 'c1ad8ebaf73c341f1'
+            #cx = os.getenv('CX')
             txt = f'{summary} {categoria}'
             chars = "',.!?[]"
             textin = txt.translate(str.maketrans('', '', chars))
@@ -146,20 +160,17 @@ def get_video_details(data):
             jason = response.json()
             links = [i['link'] for i in jason['items']]
 
-            resultado = ' '.join(links)
+            response = links
    
- 
-    except ValueError as e:
-        print(f"Erro: {e}")
-    except Exception as e:
-        print(f"Ocorreu um erro ao buscar os detalhes do vídeo: {e}")
-   
-
+        return response
     
-    return jsonify({resultado})
+    except ValueError as e:
+        return (f"Erro: {e}")
+   
+    
  
  
 # Exemplo de uso com uma URL do YouTube
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=8081)
