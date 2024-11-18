@@ -423,6 +423,61 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
     marginBottom: 10,
   },
+
+  indicadorSeek: {
+    marginTop: 20,
+  },
+
+  itemstextSeek: {
+    fontSize: 18,
+    marginVertical: 10,
+  },
+
+  itemsviewSeek: {
+    border: "1px solid #ccc",
+    borderRadius: 10,
+    padding: 10,
+    marginBottom: 10,
+    backgroundColor: "#f9f9f9",
+  },
+
+  inputlinkSeek: {
+    marginBottom: 5,
+    backgroundColor: "#e6f7ff",
+    padding: 8,
+    borderRadius: 5,
+  },
+
+  itemsviewNews: {
+    border: "1px solid #ccc",
+    borderRadius: 10,
+    padding: 10,
+    marginBottom: 10,
+    backgroundColor: "#f9f9f9",
+  },
+
+  inputlinkNews: {
+    marginBottom: 5,
+    backgroundColor: "#e6f7ff",
+    padding: 8,
+    borderRadius: 5,
+  },
+
+  itemsviewStudy: {
+    border: "1px solid #ccc",
+    borderRadius: 10,
+    padding: 10,
+    marginBottom: 10,
+    backgroundColor: "#f9f9f9",
+  },
+
+  inputlinkStudy: {
+    marginBottom: 5,
+    backgroundColor: "#e6f7ff",
+    padding: 8,
+    borderRadius: 5,
+  },
+
 });
 
 export default styles;

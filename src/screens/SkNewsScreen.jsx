@@ -1,11 +1,40 @@
+import React, { useState } from "react";
 import { Button, Surface, TextInput } from "react-native-paper";
 import styles from "../config/styles";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import { Image } from "expo-image";
 import { useTheme } from "../contexts/ThemeContexts";
+import axios from "axios";
 
 export default function SkNewsScreen({ navigation }) {
+  const [youtubeLink, setYoutubeLink] = useState(""); // Armazena o link do usuário
+  const [error, setError] = useState(""); // Armazena erros de validação
   const {isDarkTheme} = useTheme()
+  const motorBusca = "news"
+
+    // Função para validar se o link é do YouTube
+    const validateYouTubeUrl = (youtubeLink) => {
+      const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/;
+      return youtubeRegex.test(youtubeLink);
+    };
+  
+    const handleSeek = async () => {
+      if (validateYouTubeUrl(youtubeLink)){
+      try {
+          const response = await axios.post('http://192.168.100.25:8081/process', { data: youtubeLink, modelo: motorBusca });
+          navigation.navigate('ApiTest', { result: response.data });
+      } catch (error) {
+          console.error(error);
+      }
+      } else {
+      console.error("Erro com o link do youtube", error);
+    }
+    };
+    // Função para limpar o campo de texto e os erros
+    const handleClear = () => {
+      setYoutubeLink(""); // Limpa o campo de texto
+      setError(""); // Limpa a mensagem de erro
+    };
 
   const imageSource = isDarkTheme
     ? require("../img/news-light.png")
@@ -18,16 +47,21 @@ export default function SkNewsScreen({ navigation }) {
 
         <TextInput
           placeholder="Insira um link..."
-          //   onChangeText={setEmail}
-          //   value={email}
+          value={youtubeLink} // O valor do campo de texto
+          onChangeText={setYoutubeLink}
           style={styles.inputNews}
           underlineColor="transparent"
           activeUnderlineColor="transparent"
         />
 
+        {/* Exibir erro se o link for inválido */}
+        {error ? (
+          <Text style={{ color: "red", marginBottom: 10 }}>{error}</Text>
+        ) : null}
+
         <View style={styles.conjunto}>
           <Button
-            onPress={() => navigation.navigate("SignIn")}
+            onPress={handleSeek}
             mode="contained-tonal"
             style={styles.buttonN}
           >
@@ -35,7 +69,7 @@ export default function SkNewsScreen({ navigation }) {
           </Button>
 
           <Button
-            onPress={() => navigation.navigate("SignIn")}
+            onPress={handleClear}
             mode="contained-tonal"
             style={styles.buttonN}
           >
@@ -43,7 +77,7 @@ export default function SkNewsScreen({ navigation }) {
           </Button>
 
           <Button
-            onPress={() => navigation.navigate("SignIn")}
+            onPress={handleSeek}
             mode="contained-tonal"
             style={styles.news}
           >

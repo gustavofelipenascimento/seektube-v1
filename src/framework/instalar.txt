@@ -1,0 +1,8 @@
+pip install python-dotenv
+pip install google-api-python-client
+pip install youtube-transcript-api
+pip install ollama
+pip install requests
+pip install flask flask-cors
+pip install flask
+127.0.0.1

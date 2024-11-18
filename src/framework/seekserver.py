@@ -19,7 +19,9 @@ def process_data():
 
     if not data:
         response = jsonify({'error': 'URL do vídeo não fornecida.'})
-        response.headers.add('Access-Control-Allow-Origin', '*')
+        response.headers.add('Access-Control-Allow-Origin', 'http://localhost:8081')
+        response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+        response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
         return response, 400
     
     resultado = get_video_details(data)
@@ -144,11 +146,16 @@ def get_video_details(data):
  
             text = transcript
             summary = summarize_text(text)
- 
+            tipo = "news"
+            if tipo == "news":
+                cx = '540fac61a0b534509'
+            elif tipo == 'study':
+                cx = '64ae854ef96d3472d'
+            else:
+                cx = 'c1ad8ebaf73c341f1'
             baseUrl='https://customsearch.googleapis.com/customsearch/v1'
             apikey = 'AIzaSyBuR1js8SgQvg4C5MSDMox9zfXVcunY4x0'
             #apikey = os.getenv('API_KEY')
-            cx = 'c1ad8ebaf73c341f1'
             #cx = os.getenv('CX')
             txt = f'{summary} {categoria}'
             chars = "',.!?[]"
@@ -173,4 +180,4 @@ def get_video_details(data):
 # Exemplo de uso com uma URL do YouTube
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8081)
+    app.run(debug=True, host='0.0.0.0', port=8081)

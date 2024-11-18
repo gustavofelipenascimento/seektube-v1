@@ -12,7 +12,7 @@ export default function ApiScreenTest({ route, navigation }) {
     const [dados, setDados] = useState([]);
   
     useEffect(() => {
-      fetch('http://127.0.0.1:8081/process')
+      fetch('http://192.168.100.25:8081/process')
         .then(response => response.json())
         .then(data => setDados(data))
         .catch(error => console.error(error));

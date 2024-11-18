@@ -136,10 +136,17 @@ def get_video_details(video_url):
             print(f'Momento da requisição: {request_time}')
             print(f'Categoria: {categoria}')
             print(f'Transcrição: {summary}')
+
+            tipo = "study"
+            if tipo == "news":
+                cx = '540fac61a0b534509'
+            elif tipo == 'study':
+                cx = '64ae854ef96d3472d'
+            else:
+                cx = 'c1ad8ebaf73c341f1'
  
             baseUrl='https://customsearch.googleapis.com/customsearch/v1'
             apikey= 'AIzaSyBuR1js8SgQvg4C5MSDMox9zfXVcunY4x0'
-            cx = '540fac61a0b534509'
             txt = f'{summary} {categoria}'
             chars = "',.!?[]"
             textin = txt.translate(str.maketrans('', '', chars))
@@ -148,10 +155,10 @@ def get_video_details(video_url):
             url = f'{baseUrl}?key={apikey}&cx={cx}&q={query}'
             response = requests.get(url)
             jason = response.json()
-            print(url)
-            for i in jason['items']:
-                print(i['link'])
-   
+            links = [i['link'] for i in jason['items']]
+
+            response = links
+            print (response)
  
     except ValueError as e:
         print(f"Erro: {e}")
@@ -162,5 +169,5 @@ def get_video_details(video_url):
  
  
 # Exemplo de uso com uma URL do YouTube
-video_url = 'https://www.youtube.com/watch?v=IIY4pFLsKa8'
+video_url = 'https://www.youtube.com/watch?v=XYyHBwXfxyk'
 get_video_details(video_url)
