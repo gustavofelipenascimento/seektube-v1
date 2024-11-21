@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 20,
     height: 400,
+    paddingTop: 200
   },
   input: {
     height: 25,
@@ -97,27 +98,26 @@ const styles = StyleSheet.create({
     marginTop: 12,
     fontSize: 24,
     alignSelf: "center",
-    width: "30%",
+    width: "36%",
     borderWidth: 1,
     borderColor: "#7979FC",
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
     borderRadius: 50,
-    justifyContent: "space-between",
     fontWeight: "bold",
+   
   },
 
   buttonN: {
     marginTop: 12,
     fontSize: 24,
     alignSelf: "center",
-    width: "30%",
+    width: "36%",
     borderWidth: 1,
     borderColor: "#d5466d",
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
     borderRadius: 50,
-    justifyContent: "space-between",
     fontWeight: "bold",
   },
 
@@ -125,13 +125,12 @@ const styles = StyleSheet.create({
     marginTop: 12,
     fontSize: 24,
     alignSelf: "center",
-    width: "30%",
+    width: "36%",
     borderWidth: 1,
     borderColor: "#fae06f",
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
     borderRadius: 50,
-    justifyContent: "space-between",
     fontWeight: "bold",
   },
 
@@ -139,7 +138,7 @@ const styles = StyleSheet.create({
     marginTop: 12,
     backgroundColor: "#7979FC",
     alignSelf: "center",
-    width: "30%",
+    width: "36%",
     borderWidth: 1,
     borderColor: "#7979FC",
     borderTopLeftRadius: 50,
@@ -148,12 +147,13 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     fontSize: 50,
   },
+ 
 
   news: {
     marginTop: 12,
     backgroundColor: "#d5466d",
     alignSelf: "center",
-    width: "30%",
+    width: "36%",
     borderWidth: 1,
     borderColor: "#d5466d",
     borderTopLeftRadius: 50,
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
     marginTop: 12,
     backgroundColor: "#fae06f",
     alignSelf: "center",
-    width: "30%",
+    width: "36%",
     borderWidth: 1,
     borderColor: "#fae06f",
     borderTopLeftRadius: 50,
@@ -477,6 +477,68 @@ const styles = StyleSheet.create({
     padding: 8,
     borderRadius: 5,
   },
+
+  indicadorSeek: {
+    marginTop: 20,
+  },
+ 
+  itemstextSeek: {
+    paddingTop: 10,
+    fontSize: 18,
+    marginVertical: 10,
+  },
+ 
+  itemsviewSeek: {
+    border: "1px solid #ccc",
+    borderRadius: 10,
+    padding: 10,
+    marginBottom: 10,
+    backgroundColor: "#757aff"
+  },
+ 
+  inputlinkSeek: {
+    marginBottom: 5,
+    backgroundColor: "#FFFAF0",
+    padding: 8,
+    borderRadius: 5,
+  },
+ 
+  itemsviewNews: {
+    border: "1px solid #ccc",
+    borderRadius: 10,
+    padding: 10,
+    marginBottom: 10,
+    backgroundColor: "#d5466d",
+  },
+ 
+  inputlinkNews: {
+    marginBottom: 5,
+    backgroundColor: "#FFFAF0",
+    padding: 8,
+    borderRadius: 5,
+  },
+ 
+  itemsviewStudy: {
+    border: "1px solid #ccc",
+    borderRadius: 10,
+    padding: 10,
+    marginBottom: 10,
+    backgroundColor: "#fae06f",
+  },
+ 
+  inputlinkStudy: {
+    marginBottom: 5,
+    backgroundColor: "#FFFAF0",
+    padding: 8,
+    borderRadius: 5,
+  },
+ 
+  separator: {
+    height: 2,
+    backgroundColor: "#ccc",
+    marginVertical: 20,
+  },
+ 
 
 });
 

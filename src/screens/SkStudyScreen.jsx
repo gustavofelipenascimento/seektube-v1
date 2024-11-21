@@ -1,88 +1,147 @@
 import React, { useState } from "react";
-import { Button, Surface, TextInput, } from "react-native-paper";
+import { Button, Surface, TextInput, ActivityIndicator } from "react-native-paper";
+import { View, Text, ScrollView } from "react-native";
 import styles from "../config/styles";
-import { View, Text } from "react-native";
 import { Image } from "expo-image";
 import { useTheme } from "../contexts/ThemeContexts";
 import axios from "axios";
 
+export default function SeekScreen({}) {
+  const [youtubeLink, setYoutubeLink] = useState(""); // Link do usuário
+  const [error, setError] = useState(""); // Mensagem de erro
+  const [items, setItems] = useState([]); // Armazena os links vindos do servidor
+  const [isLoading, setIsLoading] = useState(false); // Indica se o carregamento está ativo
+  const { isDarkTheme } = useTheme();
+  const motorBusca = useState("study"); //modelo seek
 
-export default function SkStudyScreen({navigation}) {
-  const [youtubeLink, setYoutubeLink] = useState(""); // Armazena o link do usuário
-  const [error, setError] = useState(""); // Armazena erros de validação
-  const { isDarkTheme} = useTheme();
-  const motorBusca = "study"
-
+  // Valida se o link é do YouTube
   const validateYouTubeUrl = (youtubeLink) => {
     const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/;
     return youtubeRegex.test(youtubeLink);
   };
 
+  // Envia o link para o servidor Flask e obtém os dados
   const handleSeek = async () => {
-    if (validateYouTubeUrl(youtubeLink)){
-    try {
-        const response = await axios.post('http://192.168.100.25:8081/process', { data: youtubeLink, modelo: motorBusca });
-        navigation.navigate('ApiTest', { result: response.data });
-    } catch (error) {
-        console.error(error);
-    }
+    if (validateYouTubeUrl(youtubeLink)) {
+      setIsLoading(true); // Inicia o loading
+      try {
+        const response = await axios.post("http://172.20.132.130:8081/process", {
+          data: youtubeLink,
+          modelo: motorBusca
+        },
+        {
+          headers:  { "Content-Type": "application/json" },
+        });
+
+        // Atualiza a lista de links vindos do servidor
+        setItems(response.data || []);
+        console.log(response)
+        setError(""); // Remove erros, se houver
+      } catch (error) {
+        console.error("Erro ao processar o link:", error);
+        setError("Não foi possível processar o link.");
+      } finally {
+        setIsLoading(false); // Finaliza o loading
+      }
     } else {
-    console.error("Erro com o link do youtube", error);
-  }
+      setError("Insira um link válido do YouTube.");
+    }
   };
-  // Função para limpar o campo de texto e os erros
+
+  // Limpa os campos e os resultados
   const handleClear = () => {
-    setYoutubeLink(""); // Limpa o campo de texto
-    setError(""); // Limpa a mensagem de erro
+    setYoutubeLink("");
+    setError("");
+    setItems([]);
   };
 
-
+  // Define a imagem com base no tema
   const imageSource = isDarkTheme
     ? require("../img/study-light.png")
     : require("../img/seekstudy.png");
 
   return (
     <Surface style={styles.container}>
-      <View style={styles.innerContainer}>
-      <Image
-              style={styles.image}
-              source={imageSource}
-            />
+      <ScrollView contentContainerStyle={styles.innerContainer}>
+        <Image style={styles.image} source={imageSource} />
 
-
-     <TextInput
-              placeholder="Insira um link..."
-              value={youtubeLink} // O valor do campo de texto
-              onChangeText={setYoutubeLink}
-              style={styles.inputStudy}
-              underlineColor="transparent"
-              activeUnderlineColor="transparent"
-            />
+        <TextInput
+          placeholder="Insira um link..."
+          value={youtubeLink}
+          onChangeText={setYoutubeLink}
+          style={styles.inputStudy}
+          underlineColor="transparent"
+          activeUnderlineColor="transparent"
+        />
 
         {/* Exibir erro se o link for inválido */}
         {error ? (
           <Text style={{ color: "red", marginBottom: 10 }}>{error}</Text>
         ) : null}
 
-    <View style={styles.conjunto}>
-    <Button onPress={handleSeek} mode="contained-tonal" style={styles.buttonS}>
-            Cortar       
-        </Button>
+        <View style={styles.conjunto}>
+          <Button
+            onPress={handleSeek}
+            mode="contained-tonal"
+            style={styles.buttonS}
+            disabled={isLoading} // Desabilita o botão enquanto carrega
+          >
+            Cortar
+          </Button>
 
-        <Button onPress={handleClear} mode="contained-tonal" style={styles.buttonS}>
-          Limpar
-        </Button>
+          <Button
+            onPress={handleClear}
+            mode="contained-tonal"
+            style={styles.buttonS}
+          >
+            Limpar
+          </Button>
 
-        <Button onPress={handleSeek} mode="contained" style={styles.study}>
-          Seek!
-        </Button>
-    </View>
-      
+          <Button
+            onPress={handleSeek}
+            mode="contained-tonal"
+            style={styles.study}
+            disabled={isLoading} // Desabilita o botão enquanto carrega
+          >
+            Seek!
+          </Button>
+        </View>
 
-       
+        {/* Exibir o loading enquanto aguarda a resposta */}
+        {isLoading ? (
+          <ActivityIndicator
+            size="large"
+            style={styles.indicadorSeek}
+            animating={true}
+            color="#fae06f" // Cor do indicador de carregamento
+          />
+        ) : (
+          // Renderizar os links recebidos do servidor
+          items.length > 0 && (
+            <View>
+              <Text style={styles.itemstextSeek}>
+                Links Processados:
+              </Text>
+              {items.map((item, index) => (
+                <View
+                  key={index}
+                  style={styles.itemsviewSeek}
+                >
+                  {/* Input do link */}
+                  <a href={item} target="_blank" rel="noopener noreferrer">
+                    <TextInput
+                      value={item}
+                      editable={false}
+                      style={styles.inputlinkSeek}
+                    />
+                  </a>
 
-        {/* <TradeTheme /> */}
-      </View>
+                </View>
+              ))}
+            </View>
+          )
+        )}
+      </ScrollView>
     </Surface>
   );
 }

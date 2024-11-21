@@ -12,6 +12,7 @@ export default function SeekScreen({}) {
   const [items, setItems] = useState([]); // Armazena os links vindos do servidor
   const [isLoading, setIsLoading] = useState(false); // Indica se o carregamento está ativo
   const { isDarkTheme } = useTheme();
+  const motorBusca = useState(""); //modelo seek
 
   // Valida se o link é do YouTube
   const validateYouTubeUrl = (youtubeLink) => {
@@ -24,12 +25,17 @@ export default function SeekScreen({}) {
     if (validateYouTubeUrl(youtubeLink)) {
       setIsLoading(true); // Inicia o loading
       try {
-        const response = await axios.post("http://192.168.100.25:8081/process", {
+        const response = await axios.post("http://172.20.132.130:8081/process", {
           data: youtubeLink,
+          modelo: motorBusca
+        },
+        {
+          headers:  { "Content-Type": "application/json" },
         });
 
         // Atualiza a lista de links vindos do servidor
-        setItems(response.data.response || []);
+        setItems(response.data || []);
+        console.log(response)
         setError(""); // Remove erros, se houver
       } catch (error) {
         console.error("Erro ao processar o link:", error);
@@ -122,11 +128,13 @@ export default function SeekScreen({}) {
                   style={styles.itemsviewSeek}
                 >
                   {/* Input do link */}
-                  <TextInput
-                    value={item.link}
-                    editable={false}
-                    style={styles.inputlinkSeek}
-                  />
+                  <a href={item} target="_blank" rel="noopener noreferrer">
+                    <TextInput
+                      value={item}
+                      editable={false}
+                      style={styles.inputlinkSeek}
+                    />
+                  </a>
 
                 </View>
               ))}

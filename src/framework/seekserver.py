@@ -15,19 +15,21 @@ CORS(app, resources={r"/process": {"origins": "*"}})
 
 @app.route('/process', methods=['POST', 'GET'])
 def process_data():
-    data = request.json['data']
-
+    data = request.get_json().get('data')
     if not data:
-        response = jsonify({'error': 'URL do vídeo não fornecida.'})
-        response.headers.add('Access-Control-Allow-Origin', 'http://localhost:8081')
-        response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
-        response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
-        return response, 400
+        return jsonify({'error': 'URL do vídeo não fornecida.'}), 400
     
-    resultado = get_video_details(data)
-    response = jsonify(resultado)
-    response.headers.add('Access-Control-Allow-Origin', '*')
-    return response
+    modelo = request.get('modelo', None) 
+    if not modelo:
+        return jsonify({'error': 'URL do vídeo não fornecida.'}), 400
+
+    resultado = get_video_details(data, modelo)
+    responses = jsonify(resultado)
+    responses.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    responses.headers.add('Content-Type', 'application/json')
+    responses.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+    responses.headers.add('Access-Control-Allow-Origin', '*')
+    return responses
 # Defina sua chave de API aqui
 API_KEY = os.getenv('YOUTUBE_API_KEY')
 
@@ -54,7 +56,7 @@ def get_transcript(video_id):
         return "0"  # Se não houver transcrição disponível
  
 # Função para obter os detalhes do vídeo
-def get_video_details(data):
+def get_video_details(data, modelo):
     response = ""
     try:
         # Extrair ID do vídeo a partir da URL
@@ -146,16 +148,14 @@ def get_video_details(data):
  
             text = transcript
             summary = summarize_text(text)
-            tipo = "news"
-            if tipo == "news":
+            if modelo == "news":
                 cx = '540fac61a0b534509'
-            elif tipo == 'study':
+            elif modelo == 'study':
                 cx = '64ae854ef96d3472d'
             else:
                 cx = 'c1ad8ebaf73c341f1'
             baseUrl='https://customsearch.googleapis.com/customsearch/v1'
-            apikey = 'AIzaSyBuR1js8SgQvg4C5MSDMox9zfXVcunY4x0'
-            #apikey = os.getenv('API_KEY')
+            apikey = os.getenv('API_KEY')
             #cx = os.getenv('CX')
             txt = f'{summary} {categoria}'
             chars = "',.!?[]"
@@ -165,8 +165,11 @@ def get_video_details(data):
             url = f'{baseUrl}?key={apikey}&cx={cx}&q={query}'
             response = requests.get(url)
             jason = response.json()
+            if 'items' not in jason:
+                return jsonify({'error': 'Nenhum resultado encontrado na pesquisa.'}), 404
             links = [i['link'] for i in jason['items']]
 
+            
             response = links
    
         return response
@@ -180,4 +183,4 @@ def get_video_details(data):
 # Exemplo de uso com uma URL do YouTube
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=8081)
+    app.run(debug=True, host='172.20.132.130', port=8081)
