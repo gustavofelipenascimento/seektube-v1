@@ -5,6 +5,7 @@ import styles from "../config/styles";
 import { Image } from "expo-image";
 import { useTheme } from "../contexts/ThemeContexts";
 import axios from "axios";
+import Clipboard from '@react-native-clipboard/clipboard';
 
 export default function SeekScreen({}) {
   const [youtubeLink, setYoutubeLink] = useState(""); // Link do usuário
@@ -25,7 +26,7 @@ export default function SeekScreen({}) {
     if (validateYouTubeUrl(youtubeLink)) {
       setIsLoading(true); // Inicia o loading
       try {
-        const response = await axios.post("http://172.20.132.130:8081/process", {
+        const response = await axios.post("http://127.0.0.1:8081/process", {
           data: youtubeLink,
           modelo: motorBusca
         },
@@ -55,6 +56,16 @@ export default function SeekScreen({}) {
     setItems([]);
   };
 
+  const handleCortar = () => {
+    if (youtubeLink.trim() !== '') {
+      Clipboard.setString(youtubeLink.trim());
+      setYoutubeLink(''); // Limpa o input após copiar
+      console.log('Sucesso', 'Texto copiado para a área de transferência!');
+    } else {
+      setError('O campo está vazio!');
+    }
+  };
+
   // Define a imagem com base no tema
   const imageSource = isDarkTheme
     ? require("../img/seek-light.png")
@@ -81,7 +92,7 @@ export default function SeekScreen({}) {
 
         <View style={styles.conjunto}>
           <Button
-            onPress={handleSeek}
+            onPress={handleCortar}
             mode="contained-tonal"
             style={styles.button3}
             disabled={isLoading} // Desabilita o botão enquanto carrega

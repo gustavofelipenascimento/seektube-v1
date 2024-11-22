@@ -438,12 +438,12 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     marginBottom: 10,
-    backgroundColor: "#f9f9f9",
+    backgroundColor: "#f1f1f1",
   },
 
   inputlinkSeek: {
     marginBottom: 5,
-    backgroundColor: "#e6f7ff",
+    backgroundColor: "black",
     padding: 8,
     borderRadius: 5,
   },
@@ -453,7 +453,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     marginBottom: 10,
-    backgroundColor: "#f9f9f9",
+    backgroundColor: "#f1f1f1",
   },
 
   inputlinkNews: {
@@ -468,7 +468,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     marginBottom: 10,
-    backgroundColor: "#f9f9f9",
+    backgroundColor: "#f1f1f1",
   },
 
   inputlinkStudy: {
@@ -498,7 +498,7 @@ const styles = StyleSheet.create({
  
   inputlinkSeek: {
     marginBottom: 5,
-    backgroundColor: "#FFFAF0",
+    backgroundColor: "#f1f1f1",
     padding: 8,
     borderRadius: 5,
   },
@@ -513,7 +513,7 @@ const styles = StyleSheet.create({
  
   inputlinkNews: {
     marginBottom: 5,
-    backgroundColor: "#FFFAF0",
+    backgroundColor: "#f1f1f1",
     padding: 8,
     borderRadius: 5,
   },
@@ -528,7 +528,7 @@ const styles = StyleSheet.create({
  
   inputlinkStudy: {
     marginBottom: 5,
-    backgroundColor: "#FFFAF0",
+    backgroundColor: "#f1f1f1",
     padding: 8,
     borderRadius: 5,
   },

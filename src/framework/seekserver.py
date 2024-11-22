@@ -15,11 +15,14 @@ CORS(app, resources={r"/process": {"origins": "*"}})
 
 @app.route('/process', methods=['POST', 'GET'])
 def process_data():
-    data = request.get_json().get('data')
+    payload = request.get_json()
+
+    data = payload.get('data')
+    modelo = payload.get('modelo')
+
     if not data:
         return jsonify({'error': 'URL do vídeo não fornecida.'}), 400
     
-    modelo = request.get('modelo', None) 
     if not modelo:
         return jsonify({'error': 'URL do vídeo não fornecida.'}), 400
 
@@ -148,12 +151,14 @@ def get_video_details(data, modelo):
  
             text = transcript
             summary = summarize_text(text)
-            if modelo == "news":
+            print(modelo)
+            if modelo == ['news', None]:
                 cx = '540fac61a0b534509'
-            elif modelo == 'study':
+            elif modelo == ['study', None]:
                 cx = '64ae854ef96d3472d'
             else:
                 cx = 'c1ad8ebaf73c341f1'
+            print(cx)
             baseUrl='https://customsearch.googleapis.com/customsearch/v1'
             apikey = os.getenv('API_KEY')
             #cx = os.getenv('CX')
@@ -183,4 +188,4 @@ def get_video_details(data, modelo):
 # Exemplo de uso com uma URL do YouTube
 
 if __name__ == '__main__':
-    app.run(debug=True, host='172.20.132.130', port=8081)
+    app.run(debug=True, host='127.0.0.1', port=8081)

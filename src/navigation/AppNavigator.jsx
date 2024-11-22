@@ -47,6 +47,7 @@ import AlterarNomeScreen from "../screens/AlterarNomeScreen";
 import AlterarEstadoScreen from "../screens/AlterarEstadoScreen";
 import AlterarDataNascimentoScreen from "../screens/AlterarDtNascimentoScreen";
 import AlterarEmailScreen from "../screens/AlterarEmailScreen";
+import FavoriteScreen from "../screens/FavoriteScreen";
 
 // Configurações de navegação
 const Stack = createNativeStackNavigator();
@@ -108,7 +109,7 @@ function DrawerNavigator() {
       <Drawer.Screen name="News" component={SkNewsScreen} />
       <Drawer.Screen name="Study" component={SkStudyScreen} />
       <Drawer.Screen name="Sobre" component={SobreScreen} />
-      <Drawer.Screen name="ApiTest" component={ApiScreenTest} />
+      <Drawer.Screen name="Favoritos" component={FavoriteScreen} />
       <Drawer.Screen name="FeedBack" component={FeedbackScreen} />
     </Drawer.Navigator>
   );
