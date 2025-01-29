@@ -154,7 +154,7 @@ def get_video_details(data, modelo):
             print(modelo)
             if modelo == ['news', None]:
                 cx = '540fac61a0b534509'
-            elif modelo == ['study', None]:
+            if modelo == ['study', None]:
                 cx = '64ae854ef96d3472d'
             else:
                 cx = 'c1ad8ebaf73c341f1'

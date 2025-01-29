@@ -90,14 +90,17 @@ export default function SeekScreen({}) {
           <Text style={{ color: "red", marginBottom: 10 }}>{error}</Text>
         ) : null}
 
-        <View style={styles.conjunto}>
+        <View style={styles.conjunto2}>
           <Button
             onPress={handleCortar}
             mode="contained-tonal"
             style={styles.button3}
             disabled={isLoading} // Desabilita o botão enquanto carrega
-          >
+          > 
+          <Text style={styles.buttxt}>
             Cortar
+          </Text>
+            
           </Button>
 
           <Button
@@ -105,7 +108,9 @@ export default function SeekScreen({}) {
             mode="contained-tonal"
             style={styles.button3}
           >
+             <Text style={styles.buttxt}>
             Limpar
+            </Text>
           </Button>
 
           <Button
@@ -114,7 +119,9 @@ export default function SeekScreen({}) {
             style={styles.seek}
             disabled={isLoading} // Desabilita o botão enquanto carrega
           >
+            <Text style={styles.buttxt2}>
             Seek!
+            </Text>
           </Button>
         </View>
 
@@ -124,19 +131,21 @@ export default function SeekScreen({}) {
             size="large"
             style={styles.indicadorSeek}
             animating={true}
-            color="#6200ee" // Cor do indicador de carregamento
+            color="#757aff" // Cor do indicador de carregamento
           />
         ) : (
           // Renderizar os links recebidos do servidor
           items.length > 0 && (
             <View>
               <Text style={styles.itemstextSeek}>
-                Links Processados:
+                Confira os links abaixo em relação com o
+                seu link do youtube:
               </Text>
               {items.map((item, index) => (
                 <View
                   key={index}
                   style={styles.itemsviewSeek}
+                   underlineColor="transparent"
                 >
                   {/* Input do link */}
                   <a href={item} target="_blank" rel="noopener noreferrer">
@@ -144,6 +153,7 @@ export default function SeekScreen({}) {
                       value={item}
                       editable={false}
                       style={styles.inputlinkSeek}
+                      underlineColor="transparent"
                     />
                   </a>
 

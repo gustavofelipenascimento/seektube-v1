@@ -131,7 +131,8 @@ export default function SeekScreen({}) {
           items.length > 0 && (
             <View>
               <Text style={styles.itemstextSeek}>
-                Links Processados:
+              Confira os links abaixo em relação com o
+              seu link do youtube:
               </Text>
               {items.map((item, index) => (
                 <View

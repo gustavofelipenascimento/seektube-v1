@@ -3,6 +3,7 @@ import styles from "../config/styles";
 import { View } from "react-native";
 import { Image } from "expo-image";
 import { useTheme } from "../contexts/ThemeContexts";
+import { ScrollView } from "react-native-web";
 
 export default function SobreScreen({ navigation }) {
   const { isDarkTheme } = useTheme();
@@ -13,6 +14,7 @@ export default function SobreScreen({ navigation }) {
 
   return (
     <Surface style={styles.container}>
+      <ScrollView>
       <View style={styles.innerContainer}>
         <Image style={styles.imagesobre} source={imageSource} />
         <Text style={styles.titlesobre}>Sobre</Text>
@@ -41,6 +43,8 @@ export default function SobreScreen({ navigation }) {
           acompanhe nossa evolução!
         </Text>
       </View>
+      </ScrollView>
     </Surface>
+    
   );
 }

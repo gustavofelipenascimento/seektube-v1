@@ -96,16 +96,28 @@ const styles = StyleSheet.create({
 
   button3: {
     marginTop: 12,
-    fontSize: 24,
-    alignSelf: "center",
-    width: "36%",
+    // alignSelf: "center",
+    width: 120,
     borderWidth: 1,
     borderColor: "#7979FC",
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
     borderRadius: 50,
-    fontWeight: "bold",
+    // fontSize: "125%",
+    // fontWeight: "bold",
+    
    
+  },
+
+  buttxt:{
+    fontSize: "125%",
+    fontWeight: "bold",
+  },
+
+  buttxt2:{
+    fontSize: "125%",
+    color: "white",
+    fontWeight: "bold",
   },
 
   buttonN: {
@@ -144,8 +156,8 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
     borderRadius: 50,
-    justifyContent: "space-between",
-    fontSize: 50,
+    // justifyContent: "space-between",
+ 
   },
  
 
@@ -233,6 +245,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   conjunto: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+  },
+  conjunto2: {
     flexDirection: "row",
     justifyContent: "space-around",
   },
@@ -477,15 +493,17 @@ const styles = StyleSheet.create({
     padding: 8,
     borderRadius: 5,
   },
-
+// --------- editar abaixo
   indicadorSeek: {
-    marginTop: 20,
+    marginTop: 100,
   },
  
   itemstextSeek: {
     paddingTop: 10,
     fontSize: 18,
     marginVertical: 10,
+    fontWeight: "bold",
+    color: "#757aff",
   },
  
   itemsviewSeek: {
@@ -498,10 +516,12 @@ const styles = StyleSheet.create({
  
   inputlinkSeek: {
     marginBottom: 5,
-    backgroundColor: "#f1f1f1",
+    // backgroundColor: "#f1f1f1",
     padding: 8,
     borderRadius: 5,
   },
+
+  //  ------ editar acima
  
   itemsviewNews: {
     border: "1px solid #ccc",
