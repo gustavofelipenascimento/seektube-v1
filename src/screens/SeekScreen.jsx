@@ -7,6 +7,8 @@ import { useTheme } from "../contexts/ThemeContexts";
 import axios from "axios";
 import Clipboard from '@react-native-clipboard/clipboard';
 
+
+
 export default function SeekScreen({}) {
   const [youtubeLink, setYoutubeLink] = useState(""); // Link do usuário
   const [error, setError] = useState(""); // Mensagem de erro
@@ -142,19 +144,24 @@ export default function SeekScreen({}) {
                 seu link do youtube:
               </Text>
               {items.map((item, index) => (
+
+                
                 <View
                   key={index}
-                  style={styles.itemsviewSeek}
+                  style={styles.itemsviewSeek}    
                    underlineColor="transparent"
                 >
                   {/* Input do link */}
                   <a href={item} target="_blank" rel="noopener noreferrer">
-                    <TextInput
+
+          <TextInput
                       value={item}
                       editable={false}
                       style={styles.inputlinkSeek}
                       underlineColor="transparent"
                     />
+
+                  
                   </a>
 
                 </View>

@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 50,
     borderRadius: 50,
     padding: 10,
+    backgroundColor: "transparent",
   },
   inputStudy: {
     height: 25,
@@ -72,6 +73,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 50,
     borderRadius: 50,
     padding: 10,
+    backgroundColor: "transparent",
   },
   button: {
     marginTop: 12,
@@ -97,14 +99,13 @@ const styles = StyleSheet.create({
   button3: {
     marginTop: 12,
     // alignSelf: "center",
-    width: 120,
+    width: 110,
     borderWidth: 1,
     borderColor: "#7979FC",
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
     borderRadius: 50,
-    // fontSize: "125%",
-    // fontWeight: "bold",
+    
     
    
   },
@@ -122,35 +123,32 @@ const styles = StyleSheet.create({
 
   buttonN: {
     marginTop: 12,
-    fontSize: 24,
-    alignSelf: "center",
-    width: "36%",
+    // alignSelf: "center",
+    width: 110,
     borderWidth: 1,
     borderColor: "#d5466d",
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
     borderRadius: 50,
-    fontWeight: "bold",
+    
   },
 
   buttonS: {
     marginTop: 12,
-    fontSize: 24,
-    alignSelf: "center",
-    width: "36%",
+    // alignSelf: "center",
+    width: 110,
     borderWidth: 1,
-    borderColor: "#fae06f",
+    borderColor: "#fae06f", 
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
     borderRadius: 50,
-    fontWeight: "bold",
   },
 
   seek: {
     marginTop: 12,
     backgroundColor: "#7979FC",
     alignSelf: "center",
-    width: "36%",
+    width: 110,
     borderWidth: 1,
     borderColor: "#7979FC",
     borderTopLeftRadius: 50,
@@ -418,7 +416,6 @@ const styles = StyleSheet.create({
   },
 
 
-
   success: {
     color: "green",
     textAlign: "center",
@@ -504,14 +501,36 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     fontWeight: "bold",
     color: "#757aff",
+   
+  },
+
+  itemstextNews: {
+    paddingTop: 10,
+    fontSize: 18,
+    marginVertical: 10,
+    fontWeight: "bold",
+    color: "#d5466d",
+   
+  },
+
+  itemstextStudy: {
+    paddingTop: 10,
+    fontSize: 18,
+    marginVertical: 10,
+    fontWeight: "bold",
+    color: "#fae06f",    
+   
   },
  
   itemsviewSeek: {
-    border: "1px solid #ccc",
+    border: "5px solid #757aff",
     borderRadius: 10,
-    padding: 10,
+    padding: 2,
+    paddingBottom: 2,
     marginBottom: 10,
-    backgroundColor: "#757aff"
+    // backgroundColor: "#757aff"
+    backgroundColor: "transparent"
+
   },
  
   inputlinkSeek: {
@@ -519,38 +538,48 @@ const styles = StyleSheet.create({
     // backgroundColor: "#f1f1f1",
     padding: 8,
     borderRadius: 5,
+    backgroundColor: "transparent",
+    textDecorationLine: "none",
   },
 
   //  ------ editar acima
  
   itemsviewNews: {
-    border: "1px solid #ccc",
+    border: "5px solid #d5466d",  
     borderRadius: 10,
-    padding: 10,
+    padding: 2,
+    paddingBottom: 2,
     marginBottom: 10,
-    backgroundColor: "#d5466d",
+    // backgroundColor: "#757aff"
+    backgroundColor: "transparent"
   },
  
   inputlinkNews: {
     marginBottom: 5,
-    backgroundColor: "#f1f1f1",
+    // backgroundColor: "#f1f1f1",
     padding: 8,
     borderRadius: 5,
+    backgroundColor: "transparent",
+    textDecorationLine: "none",
   },
  
   itemsviewStudy: {
-    border: "1px solid #ccc",
+    border: "5px solid  #fae06f",
     borderRadius: 10,
-    padding: 10,
+    padding: 2,
+    paddingBottom: 2,
     marginBottom: 10,
-    backgroundColor: "#fae06f",
+    // backgroundColor: "#757aff"
+    backgroundColor: "transparent"
   },
  
   inputlinkStudy: {
     marginBottom: 5,
-    backgroundColor: "#f1f1f1",
+    // backgroundColor: "#f1f1f1",
     padding: 8,
     borderRadius: 5,
+    backgroundColor: "transparent",
+    textDecorationLine: "none",
   },
  
   separator: {

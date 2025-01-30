@@ -97,7 +97,9 @@ export default function SeekScreen({}) {
             style={styles.buttonN}
             disabled={isLoading} // Desabilita o botão enquanto carrega
           >
+            <Text style={styles.buttxt}>
             Cortar
+          </Text>
           </Button>
 
           <Button
@@ -105,7 +107,9 @@ export default function SeekScreen({}) {
             mode="contained-tonal"
             style={styles.buttonN}
           >
+             <Text style={styles.buttxt}>
             Limpar
+            </Text>
           </Button>
 
           <Button
@@ -114,7 +118,9 @@ export default function SeekScreen({}) {
             style={styles.news}
             disabled={isLoading} // Desabilita o botão enquanto carrega
           >
+            <Text style={styles.buttxt2}>
             Seek!
+            </Text>
           </Button>
         </View>
 
@@ -130,7 +136,7 @@ export default function SeekScreen({}) {
           // Renderizar os links recebidos do servidor
           items.length > 0 && (
             <View>
-              <Text style={styles.itemstextSeek}>
+              <Text style={styles.itemstextNews}>
               Confira os links abaixo em relação com o
               seu link do youtube:
               </Text>
@@ -138,6 +144,7 @@ export default function SeekScreen({}) {
                 <View
                   key={index}
                   style={styles.itemsviewNews}
+                    underlineColor="transparent"
                 >
                   {/* Input do link */}
                   <a href={item} target="_blank" rel="noopener noreferrer">
@@ -145,6 +152,7 @@ export default function SeekScreen({}) {
                       value={item}
                       editable={false}
                       style={styles.inputlinkNews}
+                        underlineColor="transparent"
                     />
                   </a>
 
