@@ -1,24 +1,24 @@
 import React, { useState } from "react";
-import { View, Alert, KeyboardAvoidingView, Platform } from "react-native";
-import { Surface, TextInput, Button, Text, IconButton, Snackbar } from "react-native-paper";
-import { getAuth } from "firebase/auth";
-import { getFirestore, collection, addDoc, Timestamp } from "firebase/firestore";
-import styles from "../config/styles";
+import { View, KeyboardAvoidingView, Platform } from "react-native";
+import { Surface, TextInput, Button, Text, Snackbar } from "react-native-paper";
 import { Image } from "expo-image";
 import { useTheme } from "../contexts/ThemeContexts";
-
+import * as MailComposer from "expo-mail-composer"; 
+import styles from "../config/styles";
 
 export default function FeedbackScreen({ navigation }) {
   const [feedback, setFeedback] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [successVisible, setSuccessVisible] = useState(false);
-  const auth = getAuth();
-  const db = getFirestore();
+  const { isDarkTheme } = useTheme();
 
-  const handleSubmitFeedback = async () => {
+  const imageSource = isDarkTheme
+    ? require("../img/seek-light.png")
+    : require("../img/seektube.png");
+
+  const handleSendEmail = async () => {
     setError("");
-
     if (!feedback.trim()) {
       setError("O campo de feedback não pode estar vazio.");
       return;
@@ -26,32 +26,29 @@ export default function FeedbackScreen({ navigation }) {
 
     setIsSubmitting(true);
 
-    const user = auth.currentUser;
-    const feedbackData = {
-      userId: user ? user.uid : "usuário anônimo",
-      feedback: feedback.trim(),
-      timestamp: Timestamp.now(),
-    };
-
     try {
-      await addDoc(collection(db, "feedback"), feedbackData);
+      const isAvailable = await MailComposer.isAvailableAsync();
+      if (!isAvailable) {
+        setError("O envio de e-mail não está disponível neste dispositivo.");
+        return;
+      }
+
+      await MailComposer.composeAsync({
+        recipients: ["darknesshimmui@gmail.com"], // Seu e-mail de destino
+        subject: "Feedback do usuário",
+        body: feedback,
+      });
 
       setSuccessVisible(true);
-      setFeedback(""); // Limpa o campo de feedback
-      setTimeout(() => navigation.goBack(), 1500); // Retorna à tela anterior após 1.5 segundos
+      setFeedback("");
+      setTimeout(() => navigation.goBack(), 1500);
     } catch (error) {
-      console.error("Erro ao enviar feedback:", error);
+      console.error("Erro ao enviar e-mail:", error);
       setError("Não foi possível enviar seu feedback.");
     } finally {
       setIsSubmitting(false);
     }
   };
-
-  const { isDarkTheme} = useTheme();
-
-  const imageSource = isDarkTheme
-    ? require("../img/seek-light.png")
-    : require("../img/seektube.png");
 
   return (
     <Surface style={styles.container}>
@@ -59,22 +56,12 @@ export default function FeedbackScreen({ navigation }) {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.innerContainer}
       >
-
-      
         <Image style={styles.image} source={imageSource} />
 
         <Text style={styles.title}>Você que manda!</Text>
-        <Text style={styles.feedSpan}>Caso queira reportar um erro em nosso site, entre em contato e fale diretamente conosco!</Text>
-
-        <TextInput
-          placeholder="Email"
-          value={feedback}
-          onChangeText={setFeedback}
-          style={styles.input}
-          underlineColor="transparent"
-          activeUnderlineColor="transparent"
-        />
-
+        <Text style={styles.feedSpan}>
+          Caso queira reportar um erro em nosso site, entre em contato e fale diretamente conosco!
+        </Text>
 
         <TextInput
           label="Seu Feedback"
@@ -88,7 +75,7 @@ export default function FeedbackScreen({ navigation }) {
 
         <Button
           style={styles.button}
-          onPress={handleSubmitFeedback}
+          onPress={handleSendEmail}
           loading={isSubmitting}
           disabled={isSubmitting}
           icon="send"

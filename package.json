@@ -29,6 +29,7 @@
     "expo-image": "~1.12.15",
     "expo-image-picker": "~15.0.7",
     "expo-location": "~17.0.1",
+    "expo-mail-composer": "~14.0.2",
     "expo-status-bar": "~1.12.1",
     "firebase": "^10.14.1",
     "materialize-css": "^1.0.0-rc.2",
@@ -44,10 +45,24 @@
     "react-native-screens": "3.31.1",
     "react-native-vector-icons": "^10.1.0",
     "react-native-web": "~0.19.10",
+    "resend": "^4.1.2",
     "yarn": "^1.22.22"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
   },
-  "private": true
+  "private": true,
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gustavofelipenascimento/seektube-v1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/gustavofelipenascimento/seektube-v1/issues"
+  },
+  "homepage": "https://github.com/gustavofelipenascimento/seektube-v1#readme"
 }

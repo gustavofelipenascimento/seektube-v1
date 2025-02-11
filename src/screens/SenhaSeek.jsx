@@ -1,54 +1,83 @@
 import React, { useState } from "react";
-import { View } from "react-native";
-import { auth } from "../config/firebase";
-import { sendPasswordResetEmail } from "firebase/auth";
+import { Button, Surface, TextInput, ActivityIndicator } from "react-native-paper";
+import { View, Text, ScrollView, Alert } from "react-native";
 import styles from "../config/styles";
-import { Surface, TextInput, Button, Text } from "react-native-paper";
 import { Image } from "expo-image";
 import { useTheme } from "../contexts/ThemeContexts";
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 
 export default function SenhaSeek({ navigation }) {
   const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+  const [isSending, setIsSending] = useState(false);
   const { isDarkTheme } = useTheme();
+
+  const handlePasswordRecovery = async () => {
+    if (!email.trim()) {
+      Alert.alert("Erro", "Por favor, insira um email válido.");
+      return;
+    }
+
+    setIsSending(true);
+    const auth = getAuth();
+
+    try {
+      await sendPasswordResetEmail(auth, email);
+      Alert.alert(
+        "Sucesso",
+        "Um email para redefinição de senha foi enviado para o endereço fornecido."
+      );
+      navigation.goBack(); // Volta para a tela anterior
+    } catch (error) {
+      console.error("Erro ao enviar o email de recuperação:", error);
+      Alert.alert("Erro", "Não foi possível enviar o email de recuperação.");
+    } finally {
+      setIsSending(false);
+    }
+  };
 
   const imageSource = isDarkTheme
     ? require("../img/seek-light.png")
     : require("../img/seektube.png");
 
-  const handlePasswordReset = () => {
-    sendPasswordResetEmail(auth, email)
-      .then(() => {
-        setMessage("Um e-mail de redefinição de senha foi enviado.");
-      })
-      .catch((error) => {
-        setMessage("Erro ao enviar e-mail de redefinição. Verifique o e-mail inserido.");
-      });
-  };
-
   return (
     <Surface style={styles.container}>
-      <View style={styles.innerContainer}>
+      <ScrollView contentContainerStyle={styles.innerContainer}>
         <Image style={styles.image} source={imageSource} />
 
-        <Text style={styles.title}>Redefinir Sua Senha</Text>
+        <Text style={styles.title}>Recuperação de Senha</Text>
 
-        <Text style={styles.inputxt}>Digite seu Email:</Text>
         <TextInput
-          placeholder="Coloque seu E-mail"
-          onChangeText={setEmail}
+          placeholder="Digite seu email"
           value={email}
+          onChangeText={setEmail}
+          keyboardType="email-address"
+          autoCapitalize="none"
           style={styles.input}
           underlineColor="transparent"
           activeUnderlineColor="transparent"
         />
 
-        <Button mode="contained" onPress={handlePasswordReset} style={styles.button}>
-          Enviar
-        </Button>
+        <View style={styles.conjunto2}>
+          <Button
+            onPress={handlePasswordRecovery}
+            mode="contained-tonal"
+            style={styles.seek}
+            disabled={isSending}
+          >
+            <Text style={styles.buttxt2}>
+              {isSending ? "Enviando..." : "Enviar Link de Recuperação"}
+            </Text>
+          </Button>
+        </View>
 
-        {message ? <Text style={styles.message}>{message}</Text> : null}
-      </View>
+        <Button
+          mode="text"
+          onPress={() => navigation.goBack()}
+          style={styles.secondaryButton}
+        >
+          <Text style={styles.buttxt}>Voltar</Text>
+        </Button>
+      </ScrollView>
     </Surface>
   );
 }
