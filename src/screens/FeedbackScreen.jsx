@@ -3,7 +3,6 @@ import { View, KeyboardAvoidingView, Platform } from "react-native";
 import { Surface, TextInput, Button, Text, Snackbar } from "react-native-paper";
 import { Image } from "expo-image";
 import { useTheme } from "../contexts/ThemeContexts";
-import * as MailComposer from "expo-mail-composer"; 
 import styles from "../config/styles";
 
 export default function FeedbackScreen({ navigation }) {
@@ -17,38 +16,33 @@ export default function FeedbackScreen({ navigation }) {
     ? require("../img/seek-light.png")
     : require("../img/seektube.png");
 
-  const handleSendEmail = async () => {
-    setError("");
+  const handleSendFeedback = async () => {
     if (!feedback.trim()) {
       setError("O campo de feedback não pode estar vazio.");
       return;
     }
-
-    setIsSubmitting(true);
-
+  
     try {
-      const isAvailable = await MailComposer.isAvailableAsync();
-      if (!isAvailable) {
-        setError("O envio de e-mail não está disponível neste dispositivo.");
-        return;
-      }
-
-      await MailComposer.composeAsync({
-        recipients: ["darknesshimmui@gmail.com"], // Seu e-mail de destino
-        subject: "Feedback do usuário",
-        body: feedback,
+      const response = await fetch("http://localhost:3000/send-feedback", { // Alterar para o URL do seu servidor
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ feedback }),
       });
-
-      setSuccessVisible(true);
-      setFeedback("");
-      setTimeout(() => navigation.goBack(), 1500);
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        setSuccessVisible(true);
+        setFeedback("");
+      } else {
+        setError(data.error || "Erro ao enviar feedback.");
+      }
     } catch (error) {
-      console.error("Erro ao enviar e-mail:", error);
-      setError("Não foi possível enviar seu feedback.");
-    } finally {
-      setIsSubmitting(false);
+      setError("Erro de conexão.");
+      console.error("Erro ao enviar feedback:", error);
     }
   };
+  
 
   return (
     <Surface style={styles.container}>
@@ -75,7 +69,7 @@ export default function FeedbackScreen({ navigation }) {
 
         <Button
           style={styles.button}
-          onPress={handleSendEmail}
+          onPress={handleSendFeedback}
           loading={isSubmitting}
           disabled={isSubmitting}
           icon="send"
